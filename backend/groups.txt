@@ -1,0 +1,265 @@
+1. Class: "NAV > .vplugin-hidden-link"
+   - "Click ESC to open the accessibility toolbar"
+   - "Skip to content"
+
+2. Class: "BUTTON > .vp-sr-only"
+   - "Accessibility Tools"
+   - "Accessibility Tools"
+
+3. Class: ".vp-wrapper > .vplugin-title"
+   - "Accessibility Tools"
+   - "Accessibility Tools"
+
+4. Class: ".vp-link.keep-style > .vp-sr-only"
+   - "Close"
+   - "Close"
+
+5. Class: ".vp-wrapper > .vp-section-title"
+   - "Adjust Text Size"
+   - "Adjust Word Spacing"
+
+6. Class: ".vp-btn.btn-slider.btn-slider-bar.keep-style > DIV"
+   - "100%"
+   - "0"
+
+7. Class: ".vp-footer-links > .vp-link"
+   - "Accessibility Policy"
+   - "Purchase"
+
+8. Class: ".powered > SPAN"
+   - "Powered By"
+   - "Powered By"
+
+9. Class: ".vp-link > SPAN"
+   - "Vee - Website Accessibility"
+   - "Vee - Website Accessibility"
+
+10. Class: ".DIV > .o_skip_to_content.btn.btn-primary.rounded-0.visually-hidden-focusable.position-absolute.start-0"
+   - "Skip to Content"
+   - "Skip to Content"
+
+11. Class: ".nav-link > SPAN"
+   - "Home"
+   - "Insights Hub"
+
+12. Class: ".nav-link.dropdown-toggle.o_mega_menu_toggle > SPAN"
+   - "Solutions"
+   - "Markets"
+
+13. Class: ".nav-link.dropdown-toggle.o_mega_menu_toggle.active > SPAN"
+   - "Company"
+   - "Company"
+
+14. Class: ".col-12.py-2.o_colored_level.col-lg-3 > H5"
+   - "Stay Connected"
+   - "Stay Connected"
+
+15. Class: ".col-12.py-2.o_colored_level.col-lg-3 > .text-muted.small"
+   - "Let’s stay in touch—follow us on social media for the latest updates, stories, and insights."
+   - "Let’s stay in touch—follow us on social media for the latest updates, stories, and insights."
+
+16. Class: ".s_social_media.o_not_editable.text-start > .s_social_media_title.d-none.o_default_snippet_text"
+   - "Social Media"
+   - "Social Media"
+
+17. Class: ".container > .oe_unremovable.btn_cta.btn.btn-primary"
+   - "Login"
+   - "Login"
+
+18. Class: ".nav-link.dropdown-toggle.o_mega_menu_toggle.d-flex.justify-content-between.align-items-center > SPAN"
+   - "Solutions"
+   - "Markets"
+
+19. Class: ".nav-link.dropdown-toggle.o_mega_menu_toggle.d-flex.justify-content-between.align-items-center.active > SPAN"
+   - "Company"
+   - "Company"
+
+20. Class: ".container > .oe_unremovable.btn_cta.btn.btn-primary.w-100"
+   - "Login"
+   - "Login"
+
+21. Class: ".s_allow_columns.container > H1"
+   - "Build the Future of Wireless"
+   - "Employee of the Quarter"
+
+22. Class: ".s_allow_columns.container > P"
+   - "Innovation at RADWIN starts with people. We’re a global team of
+engineers, creators, and collaborators developing real-world solutions
+using cutting-edge technologies like AI, cloud-native platforms, edge
+computing, and automation. Whether in R&D or customer-facing roles, we
+work across disciplines to solve complex challenges together."
+   - "Recognizing the people who go above and beyond."
+
+23. Class: "P > .o_translate_inline.btn.btn-primary"
+   - "Explore Open Positions"
+   - "Explore Open Positions"
+
+24. Class: ".o_colored_level.o_grid_item.g-col-lg-12.g-height-3.col-lg-12 > H2"
+   - "Our People: A Collective of"
+   - "Our People: A Collective of"
+
+25. Class: ".o_colored_level.o_grid_item.g-col-lg-12.g-height-3.col-lg-12 > .lead"
+   - "RADWIN is home to some of the most curious, humble, and talented
+people you’ll ever meet. We’re a multilingual, multicultural team united by a shared sense of purpose and a passion for pushing boundaries.
+Collaboration is second nature and learning never stops."
+   - "RADWIN is home to some of the most curious, humble, and talented
+people you’ll ever meet. We’re a multilingual, multicultural team united by a shared sense of purpose and a passion for pushing boundaries.
+Collaboration is second nature and learning never stops."
+
+26. Class: "P > SPAN"
+   - "10+ languages are spoken across teams and regions"
+   - "High-trust, high-collaboration culture where ideas move fast"
+
+27. Class: ".col-lg-3.pt16.pb16.o_colored_level > P"
+   - "You’re rarely the smartest person in the room and that’s what makes
+it exciting"
+   - "You’re rarely the smartest person in the room and that’s what makes
+it exciting"
+
+28. Class: ".card-body > H4"
+   - "Lead What’s Next."
+   - "Lead What’s Next."
+
+29. Class: ".card-body > .card-text"
+   - "At RADWIN, growth isn’t a program, it’s how we operate. From internal
+RADWIN Talks to AI enablement, certified courses, and knowledge-sharing
+sessions, every employee is encouraged to speak up, lead, and evolve."
+   - "We believe culture is what you do, not just what you say. At RADWIN, we
+celebrate our people often and openly, bringing teams together to
+connect, share, and learn."
+
+30. Class: ".card-body > .card-title"
+   - "in Action"
+   - "in Action"
+
+31. Class: ".o_colored_level.o_grid_item.g-col-lg-7.g-height-10.col-lg-7 > P"
+   - "Gabi embodies professional excellence, service orientation, and true teamwork. Within RADWIN’s IT department, his deep technological knowledge and calm, solution-driven approach make him an indispensable pillar of support across the company."
+   - "Gabi’s dedication, reliability, and positive influence reach far beyond his role. We proudly recognize him as ourfor his outstanding contributions and inspiring spirit."
+
+32. Class: ".d-flex.flex-column.flex-md-row.flex-md-wrap.flex-lg-nowrap.align-items-center.justify-content-between.w-100 > .navbar-brand.h5.my-0.me-sm-auto"
+   - "Our Job Offers"
+   - "Our Job Offers"
+
+33. Class: ".dropdown-menu.w-100.w-md-auto > .dropdown-item.d-flex.align-items-center.justify-content-between.nav-link.active"
+   - "All Offices"
+   - "All Departments"
+
+34. Class: ".dropdown-item.d-flex.align-items-center.justify-content-between.nav-link.active > .badge.text-bg-primary.ms-2"
+   - "5"
+   - "5"
+
+35. Class: ".dropdown-item.d-flex.align-items-center.justify-content-between.nav-link > .fst-italic"
+   - "No address specified"
+   - "No address specified"
+
+36. Class: ".dropdown-item.d-flex.align-items-center.justify-content-between.nav-link > .badge.text-bg-primary.ms-2"
+   - "3"
+   - "1"
+
+37. Class: ".dropdown-menu.w-100.w-md-auto > .dropdown-item.d-flex.align-items-center.justify-content-between.nav-link"
+   - "Tel Aviv-Yafo, Israel"
+   - "Engineering"
+
+38. Class: ".mt0.d-flex.justify-content-between.align-items-center > H3"
+   - "Senior Antenna / Array Design Engineer"
+   - "Administrative Manager"
+
+39. Class: ".card-body.p-4 > .text-reset"
+   - "open position"
+   - "open position"
+
+40. Class: ".text-reset > SPAN"
+   - "1"
+   - "1"
+
+41. Class: ".o_portal_address.mb-0 > .css_non_editable_mode_hidden"
+   - "----"
+   - "----"
+
+42. Class: ".css_non_editable_mode_hidden > .text-muted"
+   - "RADWIN Ltd, Chennai, India"
+   - "RADWIN Ltd, Europe - Remote"
+
+43. Class: ".d-inline-flex.align-items-center > .fw-light"
+   - "R&D"
+   - "Hybrid"
+
+44. Class: ".card-body.p-4 > .oe_empty.text-muted.mb16"
+   - "RADWIN is looking for a *proactive and highly organized Administrative Manager* (50% position) to ensure the smooth day-to-day operations of our office."
+   - "Join RADWIN as a Senior Real-Time Embedded Software Developer and play a key role in shaping the future of global communication and connectivity! We’re looking for innovative minds to design and implement advanced Point-to-MultiPoint (PtMP) solutions that push the boundaries of technology. In this exciting role, you’ll collaborate with system and architecture teams, and be part of a dynamic, supportive team that thrives on innovation, growth, and making a meaningful impact on state of the art solution."
+
+45. Class: "SPAN > DIV"
+   - ","
+   - ","
+
+46. Class: "DIV > SPAN"
+   - "Tel Aviv-Yafo"
+   - "Israel"
+
+47. Class: ".o_colored_level.shadow.o_grid_item.g-col-lg-6.g-height-3.col-lg-6 > P"
+   - "RADWIN connects people, businesses, and critical infrastructure with reliable, secure, and scalable wireless solutions, keeping the world connected, resilient, and ready for what’s next."
+   - "RADWIN connects people, businesses, and critical infrastructure with reliable, secure, and scalable wireless solutions, keeping the world connected, resilient, and ready for what’s next."
+
+48. Class: ".s_social_media.o_not_editable.text-start > .s_social_media_title.o_default_snippet_text.d-none"
+   - "Social Media"
+   - "Social Media"
+
+49. Class: ".text-o-color-5 > .fa.fa-envelope-o"
+   - "​"
+   - "​"
+
+50. Class: ".list-item.py-1 > A"
+   - "Contact us"
+   - "Subscriber"
+
+51. Class: "H6 > .h4-fs"
+   - "Solutions"
+   - "Solutions"
+
+52. Class: "P > .o_translate_inline"
+   - "WISPs"
+   - "Power Utilities"
+
+53. Class: ".o_small > .o_translate_inline"
+   - "Terms of Use"
+   - "Cookie Policy"
+
+54. Class: "P > .pe-1"
+   - "We use cookies to provide you a better user experience on this website."
+   - "We use cookies to provide you a better user experience on this website."
+
+55. Class: "P > .o_cookies_bar_text_policy.btn.btn-link.btn-sm.px-0"
+   - "Cookie Policy"
+   - "Cookie Policy"
+
+56. Class: ".col-lg-4.text-end.pt16.pb16 > .js_close_popup.btn.btn-outline-primary.rounded-circle.btn-sm.px-2"
+   - "Only essentials"
+   - "Only essentials"
+
+57. Class: ".col-lg-4.text-end.pt16.pb16 > .js_close_popup.btn.btn-outline-primary.rounded-circle.btn-sm"
+   - "I agree"
+   - "I agree"
+
+58. Class: ".navbar-brand.h4.my-0.me-auto > A"
+   - "All Jobs"
+   - "All Jobs"
+
+59. Class: ".col-md-9 > H1"
+   - "Senior Antenna / Array Design Engineer"
+   - "Administrative Manager"
+
+60. Class: ".text-center > .btn.btn-primary.btn-lg"
+   - "Apply Now!"
+   - "Apply Now!"
+
+61. Class: "DIV > H3"
+   - "Description"
+   - "Requirements"
+
+62. Class: "DIV > P"
+   - "RADWIN is looking for a(50% position) to ensure the smooth day-to-day operations of our office."
+   - "If you’re someone who loves creating an efficient, welcoming, and engaging work environment, we’d love to meet you!"
+
+63. Class: "DIV > .ql-align-justify"
+   - "RADWIN is seeking passionate Firmware engineer with 5–8 years of experience in developing Wi-Fi firmware. The role involves working on embedded software development for Wi-Fi 6/7 chipsets, focusing on Upper MAC/Lower MAC, Data and Control Paths, and performance optimization within RTOS environments. You will be part of the new RADWIN Firmware Innovation Centre in Chennai contributing to high performance wireless solutions."
+   - "RADWIN is seeking passionate Firmware Tech Lead Engineer with 5–8 years of experience in developing Wi-Fi firmware. The role involves working on embedded software development for Wi-Fi 6/7 chipsets, focusing on Upper MAC/Lower MAC, Data and Control Paths, and performance optimization within RTOS environments. You will be part of the new RADWIN Firmware Innovation Center in Chennai contributing to high performance wireless solutions."

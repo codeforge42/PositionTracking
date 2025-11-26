@@ -1,0 +1,43 @@
+import axios from "axios";
+import { Company } from "@/types";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
+export const getCompanies = async (customerId: string): Promise<Company[]> => {
+    const response = await axios.get(`${BASE_URL}/customers-companies/${customerId}`);
+    return response.data.companies;
+};
+
+export const createCompany = async (customerId: string, name: string, website: string, linkedin: string, notes: string, period: string): Promise<Company[]> => {
+    const response = await axios.post(`${BASE_URL}/customers-companies/${customerId}`, { name, website, linkedin, notes, period });
+    return response.data.companies;
+};
+
+export const updateCompany = async (customerId: string, companyId: string, data: Partial<Company>): Promise<Company> => {
+    const response = await axios.put(`${BASE_URL}/customers-companies/${customerId}/${companyId}`, data);
+    return response.data.company;
+};
+
+export const deleteCompany = async (customerId: string, companyId: string): Promise<Company[]> => {
+    const response = await axios.delete(`${BASE_URL}/customers-companies/${customerId}/${companyId}`);
+    return response.data.companies;
+};
+
+export const scanCompany = async (customerId: string, companyId: string): Promise<string> => {
+    const response = await axios.put(`${BASE_URL}/customers-companies/${customerId}/${companyId}/scan`);
+    return response.data.company;
+};
+
+export const scanAllCompanies = async (customerId: string): Promise<Company[]> => {
+    const response = await axios.post(`${BASE_URL}/customers-companies/${customerId}/scan`);
+    return response.data.companies;
+};
+
+export const deleteRecords = async (customerId: string, companyId: string): Promise<string> => {
+    const response = await axios.post(`${BASE_URL}/customers-companies/${customerId}/${companyId}/deleteRecords`);
+    return response.data.message;
+};
+
+export const deleteAllRecords = async (customerId: string): Promise<string> => {
+    const response = await axios.post(`${BASE_URL}/customers-companies/${customerId}/deleteRecords`);
+    return response.data.message;
+};
