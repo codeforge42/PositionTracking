@@ -535,7 +535,7 @@ const Scraper = async (url, apiKey, step, links) => {
                   if (!frameAnchors[a.className]) {
                     frameAnchors[a.className] = [];
                   }
-                  a.elements.map((a_el) => {
+                  a.elements?.map((a_el) => {
                     if (!frameAnchors[a.className].includes(a_el))
                       frameAnchors[a.className].push(a_el);
                   });
@@ -561,7 +561,7 @@ const Scraper = async (url, apiKey, step, links) => {
           // Add the extracted anchors to the jobAnchors array
           frameAnchors.map((a) => {
             if (!result[a.className]) result[a.className] = [];
-            a.elements.map((a_el) => {
+            a.elements?.map((a_el) => {
               if (!result[a.className].includes(a_el))
                 result[a.className].push(a_el);
             });
@@ -634,7 +634,7 @@ const Scraper = async (url, apiKey, step, links) => {
       // Add the extracted anchors to the jobAnchors array
       frameAnchors.map((a) => {
         if (!result[a.className]) result[a.className] = [];
-        a.elements.map((a_el) => {
+        a.elements?.map((a_el) => {
           if (!result[a.className].includes(a_el))
             result[a.className].push(a_el);
         });
@@ -827,7 +827,7 @@ const Scraper = async (url, apiKey, step, links) => {
   Extract all job postings in JSON format with the following fields:
   - title: Extracted from the content
   - company: Extracted from the href (if available)
-  - link: A valid, full URL of the company relating to href and ${url.docum}.
+  - link: A valid, full URL of the company relating to href and ${new URL(url).hostname}.
 
   Output in the following JSON format:
   [
@@ -847,10 +847,10 @@ Extract all job postings in JSON format with the following fields:
 
 - title: Extracted from the content
 - company: Extracted from the href text if it contains the company name; otherwise leave as an empty string.
-- link: **Use the href EXACTLY as provided in the input. DO NOT modify it, DO NOT prepend ${url}, and DO NOT transform it.**
+- link: **Use the href EXACTLY as provided in the input. DO NOT modify it, DO NOT prepend ${new URL(url).hostname}, and DO NOT transform it.**
 
 Important rules:
-- Do NOT combine href with ${url}.
+- Do NOT combine href with ${new URL(url).hostname}.
 - Do NOT generate or guess URLs.
 - Do NOT rewrite or complete the href. Use it exactly as-is.
 - Only output JSON.
