@@ -288,7 +288,7 @@ const Scraper = async (url, apiKey, step, links) => {
       )
       .then((response) => {
         snapshot_id = response.data.snapshot_id;
-        // console.log(response.data);
+        console.log(response.data);
       })
       .catch((error) => console.error(error));
 
