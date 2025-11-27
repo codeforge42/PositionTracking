@@ -210,7 +210,7 @@ async function findItem(page, selector) {
   return jobAnchor;
 }
 
-const Scraper = async (url, apiKey, step, links) => {
+const Scraper = async (name, url, apiKey, step, links) => {
   console.log("url", url);
   if (!url) return { found: 1, jobs: "[]" };
   const openai = new OpenAI({ apiKey: apiKey });
@@ -243,7 +243,7 @@ const Scraper = async (url, apiKey, step, links) => {
     // LinkedIn URLs can contain the company as a query param (keywords)
     // or as a path segment like /company/videocites/jobs/.
     const parsedUrl = new URL(url);
-    let companyName = parsedUrl.searchParams.get("keywords");
+    let companyName = name;
 
     // If no keywords param, try to extract from the pathname segments
     if (!companyName) {

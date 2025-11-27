@@ -69,12 +69,12 @@ class Company {
         // Await the Scraper function
         const links = [];
         company.jobs.map(job => links.push(job.link));
-        WebsitejobList = await Scraper(company.website, apiKey, 1, links);
+        WebsitejobList = await Scraper(company.name, company.website, apiKey, 1, links);
         if (WebsitejobList.found != 1) {
           if (JSON.parse(WebsitejobList.matches).length > 0) {
             let Jobs = [], PartList, Joblinks = [];
             for (const url of JSON.parse(WebsitejobList.matches)) {
-              PartList = await Scraper(url, apiKey, 2, links);
+              PartList = await Scraper(company.name, url, apiKey, 2, links);
     
               JSON.parse(PartList.jobs).map(job => {
                 if (Joblinks.filter(j => j == job.link).length == 0) {
@@ -86,7 +86,7 @@ class Company {
             WebsitejobList = { found: 1, jobs: JSON.stringify(Jobs) };
           }
         }
-        LinkedinjobList = await Scraper(company.linkedin, apiKey, 2, links);
+        LinkedinjobList = await Scraper(company.name, company.linkedin, apiKey, 2, links);
     
         jobList = [...JSON.parse(WebsitejobList.jobs), ...JSON.parse(LinkedinjobList.jobs)];
         

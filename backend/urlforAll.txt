@@ -35,5 +35,6 @@
   "www.appcharge.com": "https://www.appcharge.com/careers",
   "www.cyclops.security": "https://www.cyclops.security/careers",
   "www.evinced.com": "https://www.evinced.com/careers",
-  "apply.workable.com": "https://apply.workable.com/careers/"
+  "apply.workable.com": "https://apply.workable.com/careers/",
+  "www.notraffic.com": "https://www.notraffic.com/careers/"
 }

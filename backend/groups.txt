@@ -1,265 +1,133 @@
-1. Class: "NAV > .vplugin-hidden-link"
-   - "Click ESC to open the accessibility toolbar"
-   - "Skip to content"
+1. Class: "DIV > P"
+   - "This website stores cookies on your computer. These cookies are used to collect information about how you interact with our website and allow us to remember you. We use this information in order to improve and customize your browsing experience and for analytics and metrics about our visitors both on this website and other media. To find out more about the cookies we use, see our Privacy Policy."
 
-2. Class: "BUTTON > .vp-sr-only"
-   - "Accessibility Tools"
-   - "Accessibility Tools"
+2. Class: "SPAN > .main-text"
+   - "AI Mobility Platform"
+   - "Edge Devices"
 
-3. Class: ".vp-wrapper > .vplugin-title"
-   - "Accessibility Tools"
-   - "Accessibility Tools"
+3. Class: ".main-menu__bottom > .btn.btn-primary"
+   - "Book a Meeting"
 
-4. Class: ".vp-link.keep-style > .vp-sr-only"
-   - "Close"
-   - "Close"
+4. Class: ".social > A"
+   - "linkedin"
+   - "youtube"
 
-5. Class: ".vp-wrapper > .vp-section-title"
-   - "Adjust Text Size"
-   - "Adjust Word Spacing"
+5. Class: ".btn.btn-primary.btn-header > .main-text"
+   - "Book a Meeting"
 
-6. Class: ".vp-btn.btn-slider.btn-slider-bar.keep-style > DIV"
-   - "100%"
-   - "0"
+6. Class: ".nt-career-archive-hero__team-member.slick-slide > .nt-career-archive-hero__team-member__text"
+   - "What I enjoy most is how my work directly contributes to improving cities worldwide. Collaboration here is incredible. Everyone is committed to the mission!"
+   - "At NoTraffic, every day brings an exciting challenge. I love being part of a team that’s not just dreaming about the future of transportation but actively building it"
 
-7. Class: ".vp-footer-links > .vp-link"
-   - "Accessibility Policy"
-   - "Purchase"
+7. Class: ".nt-career-archive-hero__team-member__author__info > .nt-career-archive-hero__team-member__author__name"
+   - "Stella Chulak"
+   - "Ian Fountain"
 
-8. Class: ".powered > SPAN"
-   - "Powered By"
-   - "Powered By"
+8. Class: ".nt-career-archive-hero__team-member__author__info > .nt-career-archive-hero__team-member__author__position"
+   - "Sr. HW Test Engineer"
+   - "Director of Quality & Reliability"
 
-9. Class: ".vp-link > SPAN"
-   - "Vee - Website Accessibility"
-   - "Vee - Website Accessibility"
+9. Class: ".nt-career-archive-hero__team-member.slick-slide.slick-current.slick-active > .nt-career-archive-hero__team-member__text"
+   - "I’m proud to work at a place that combines cutting-edge technology and a strong focus upon reliable performance"
 
-10. Class: ".DIV > .o_skip_to_content.btn.btn-primary.rounded-0.visually-hidden-focusable.position-absolute.start-0"
-   - "Skip to Content"
-   - "Skip to Content"
+10. Class: ".nt-career-archive-hero__content > H1"
+   - "Work on a Challenge That Matters"
 
-11. Class: ".nav-link > SPAN"
-   - "Home"
-   - "Insights Hub"
+11. Class: ".nt-career-archive-hero__content > P"
+   - "Join a team of innovators dedicated to solving problems using the latest technologies, such as AI, advanced sensors, and edge computing, to address mobility challenges. Be part of a company that values collaboration and creativity in order to make a real-world impact"
 
-12. Class: ".nav-link.dropdown-toggle.o_mega_menu_toggle > SPAN"
-   - "Solutions"
-   - "Markets"
+12. Class: "P > .btn.btn-primary"
+   - "Open Positions"
 
-13. Class: ".nav-link.dropdown-toggle.o_mega_menu_toggle.active > SPAN"
-   - "Company"
-   - "Company"
+13. Class: ".acf-innerblocks-container > H2"
+   - "Life at NoTraffic"
 
-14. Class: ".col-12.py-2.o_colored_level.col-lg-3 > H5"
-   - "Stay Connected"
-   - "Stay Connected"
+14. Class: ".nt-life__list__item.aos-init.aos-animate > .nt-life__list__item__title"
+   - "Innovationat Heart"
+   - "ExcellenceWithout Limits"
 
-15. Class: ".col-12.py-2.o_colored_level.col-lg-3 > .text-muted.small"
-   - "Let’s stay in touch—follow us on social media for the latest updates, stories, and insights."
-   - "Let’s stay in touch—follow us on social media for the latest updates, stories, and insights."
+15. Class: ".nt-perks-benefits__title > H2"
+   - "Perks and Benefits"
 
-16. Class: ".s_social_media.o_not_editable.text-start > .s_social_media_title.d-none.o_default_snippet_text"
-   - "Social Media"
-   - "Social Media"
+16. Class: ".nt-perks-benefits__list__item.slick-slide.slick-current.slick-active.active-benefit.aos-init.aos-animate > .nt-perks-benefits__list__item__title"
+   - "Flexible Work Environment"
 
-17. Class: ".container > .oe_unremovable.btn_cta.btn.btn-primary"
-   - "Login"
-   - "Login"
+17. Class: ".nt-perks-benefits__list__item.slick-slide.slick-current.slick-active.active-benefit.aos-init.aos-animate > .nt-perks-benefits__list__item__text"
+   - "We believe in balancing work with life. NoTraffic offers a flexible, hybrid work model, trusting our employees with adaptable hours and locations"
 
-18. Class: ".nav-link.dropdown-toggle.o_mega_menu_toggle.d-flex.justify-content-between.align-items-center > SPAN"
-   - "Solutions"
-   - "Markets"
+18. Class: ".nt-perks-benefits__list__item.slick-slide.slick-active.aos-init.aos-animate > .nt-perks-benefits__list__item__title"
+   - "Community Contribution"
+   - "Celebrations & Wellness"
 
-19. Class: ".nav-link.dropdown-toggle.o_mega_menu_toggle.d-flex.justify-content-between.align-items-center.active > SPAN"
-   - "Company"
-   - "Company"
+19. Class: ".nt-perks-benefits__list__item.slick-slide.slick-active.aos-init.aos-animate > .nt-perks-benefits__list__item__text"
+   - "Giving back is in our DNA. NoTraffic actively contributes to society, whether through volunteer work or supporting causes financially"
+   - "We foster a vibrant work environment with team events, weekly happy hours, and a fully equipped sports room for fitness and relaxation. Enjoy a stocked kitchen with plenty of snacks to keep you energized all day"
 
-20. Class: ".container > .oe_unremovable.btn_cta.btn.btn-primary.w-100"
-   - "Login"
-   - "Login"
+20. Class: ".nt-career-list__title > H2"
+   - "Open Positions"
 
-21. Class: ".s_allow_columns.container > H1"
-   - "Build the Future of Wireless"
-   - "Employee of the Quarter"
+21. Class: ".filters__category__active.js-openFilter > .filters__category__current.js-currentFilter.country"
+   - "All countries"
 
-22. Class: ".s_allow_columns.container > P"
-   - "Innovation at RADWIN starts with people. We’re a global team of
-engineers, creators, and collaborators developing real-world solutions
-using cutting-edge technologies like AI, cloud-native platforms, edge
-computing, and automation. Whether in R&D or customer-facing roles, we
-work across disciplines to solve complex challenges together."
-   - "Recognizing the people who go above and beyond."
+22. Class: ".filters__category__list.js-listFilter > .filters__category__list__item.js-varFilter"
+   - "All countries"
+   - "IL"
 
-23. Class: "P > .o_translate_inline.btn.btn-primary"
-   - "Explore Open Positions"
-   - "Explore Open Positions"
+23. Class: ".filters__category__active.js-openFilter > .filters__category__current.js-currentFilter.department"
+   - "All departments"
 
-24. Class: ".o_colored_level.o_grid_item.g-col-lg-12.g-height-3.col-lg-12 > H2"
-   - "Our People: A Collective of"
-   - "Our People: A Collective of"
-
-25. Class: ".o_colored_level.o_grid_item.g-col-lg-12.g-height-3.col-lg-12 > .lead"
-   - "RADWIN is home to some of the most curious, humble, and talented
-people you’ll ever meet. We’re a multilingual, multicultural team united by a shared sense of purpose and a passion for pushing boundaries.
-Collaboration is second nature and learning never stops."
-   - "RADWIN is home to some of the most curious, humble, and talented
-people you’ll ever meet. We’re a multilingual, multicultural team united by a shared sense of purpose and a passion for pushing boundaries.
-Collaboration is second nature and learning never stops."
-
-26. Class: "P > SPAN"
-   - "10+ languages are spoken across teams and regions"
-   - "High-trust, high-collaboration culture where ideas move fast"
-
-27. Class: ".col-lg-3.pt16.pb16.o_colored_level > P"
-   - "You’re rarely the smartest person in the room and that’s what makes
-it exciting"
-   - "You’re rarely the smartest person in the room and that’s what makes
-it exciting"
-
-28. Class: ".card-body > H4"
-   - "Lead What’s Next."
-   - "Lead What’s Next."
-
-29. Class: ".card-body > .card-text"
-   - "At RADWIN, growth isn’t a program, it’s how we operate. From internal
-RADWIN Talks to AI enablement, certified courses, and knowledge-sharing
-sessions, every employee is encouraged to speak up, lead, and evolve."
-   - "We believe culture is what you do, not just what you say. At RADWIN, we
-celebrate our people often and openly, bringing teams together to
-connect, share, and learn."
-
-30. Class: ".card-body > .card-title"
-   - "in Action"
-   - "in Action"
-
-31. Class: ".o_colored_level.o_grid_item.g-col-lg-7.g-height-10.col-lg-7 > P"
-   - "Gabi embodies professional excellence, service orientation, and true teamwork. Within RADWIN’s IT department, his deep technological knowledge and calm, solution-driven approach make him an indispensable pillar of support across the company."
-   - "Gabi’s dedication, reliability, and positive influence reach far beyond his role. We proudly recognize him as ourfor his outstanding contributions and inspiring spirit."
-
-32. Class: ".d-flex.flex-column.flex-md-row.flex-md-wrap.flex-lg-nowrap.align-items-center.justify-content-between.w-100 > .navbar-brand.h5.my-0.me-sm-auto"
-   - "Our Job Offers"
-   - "Our Job Offers"
-
-33. Class: ".dropdown-menu.w-100.w-md-auto > .dropdown-item.d-flex.align-items-center.justify-content-between.nav-link.active"
-   - "All Offices"
-   - "All Departments"
-
-34. Class: ".dropdown-item.d-flex.align-items-center.justify-content-between.nav-link.active > .badge.text-bg-primary.ms-2"
-   - "5"
-   - "5"
-
-35. Class: ".dropdown-item.d-flex.align-items-center.justify-content-between.nav-link > .fst-italic"
-   - "No address specified"
-   - "No address specified"
-
-36. Class: ".dropdown-item.d-flex.align-items-center.justify-content-between.nav-link > .badge.text-bg-primary.ms-2"
-   - "3"
-   - "1"
-
-37. Class: ".dropdown-menu.w-100.w-md-auto > .dropdown-item.d-flex.align-items-center.justify-content-between.nav-link"
-   - "Tel Aviv-Yafo, Israel"
-   - "Engineering"
-
-38. Class: ".mt0.d-flex.justify-content-between.align-items-center > H3"
-   - "Senior Antenna / Array Design Engineer"
-   - "Administrative Manager"
-
-39. Class: ".card-body.p-4 > .text-reset"
-   - "open position"
-   - "open position"
-
-40. Class: ".text-reset > SPAN"
-   - "1"
-   - "1"
-
-41. Class: ".o_portal_address.mb-0 > .css_non_editable_mode_hidden"
-   - "----"
-   - "----"
-
-42. Class: ".css_non_editable_mode_hidden > .text-muted"
-   - "RADWIN Ltd, Chennai, India"
-   - "RADWIN Ltd, Europe - Remote"
-
-43. Class: ".d-inline-flex.align-items-center > .fw-light"
+24. Class: ".aos-init.aos-animate > H3"
+   - "Product Management"
    - "R&D"
-   - "Hybrid"
 
-44. Class: ".card-body.p-4 > .oe_empty.text-muted.mb16"
-   - "RADWIN is looking for a *proactive and highly organized Administrative Manager* (50% position) to ensure the smooth day-to-day operations of our office."
-   - "Join RADWIN as a Senior Real-Time Embedded Software Developer and play a key role in shaping the future of global communication and connectivity! We’re looking for innovative minds to design and implement advanced Point-to-MultiPoint (PtMP) solutions that push the boundaries of technology. In this exciting role, you’ll collaborate with system and architecture teams, and be part of a dynamic, supportive team that thrives on innovation, growth, and making a meaningful impact on state of the art solution."
+25. Class: ".nt-career-list__listing__item > .nt-career-list__listing__item__title"
+   - "Senior Technical Product Manager"
+   - "Backend Team Lead"
 
-45. Class: "SPAN > DIV"
-   - ","
-   - ","
+26. Class: ".nt-career-list__listing__item__info > .nt-career-list__listing__item__employment-type"
+   - "Full-time"
+   - "Full-time"
 
-46. Class: "DIV > SPAN"
-   - "Tel Aviv-Yafo"
-   - "Israel"
+27. Class: ".nt-career-list__listing__item__info > .nt-career-list__listing__item__location"
+   - "Tel Aviv Office, IL"
+   - "Tel Aviv Office, IL"
 
-47. Class: ".o_colored_level.shadow.o_grid_item.g-col-lg-6.g-height-3.col-lg-6 > P"
-   - "RADWIN connects people, businesses, and critical infrastructure with reliable, secure, and scalable wireless solutions, keeping the world connected, resilient, and ready for what’s next."
-   - "RADWIN connects people, businesses, and critical infrastructure with reliable, secure, and scalable wireless solutions, keeping the world connected, resilient, and ready for what’s next."
+28. Class: ".nt-career-list__listing__item__btn > .btn.btn-primary"
+   - "Apply"
+   - "Apply"
 
-48. Class: ".s_social_media.o_not_editable.text-start > .s_social_media_title.o_default_snippet_text.d-none"
-   - "Social Media"
-   - "Social Media"
+29. Class: ".nt-cta__wrap > .aos-init.aos-animate"
+   - "Book a Meeting"
+   - "NoTraffic empowers agencies to optimize infrastructure, enhance efficiency, and improve safety by transforming intersections into a connected, digital network"
 
-49. Class: ".text-o-color-5 > .fa.fa-envelope-o"
-   - "​"
-   - "​"
+30. Class: ".aos-init.aos-animate > .btn.btn-secondary"
+   - "Book a meeting"
 
-50. Class: ".list-item.py-1 > A"
-   - "Contact us"
-   - "Subscriber"
-
-51. Class: "H6 > .h4-fs"
-   - "Solutions"
+31. Class: "DIV > H3"
+   - "Home"
    - "Solutions"
 
-52. Class: "P > .o_translate_inline"
-   - "WISPs"
-   - "Power Utilities"
+32. Class: "LI > A"
+   - "Careers"
+   - "Resources"
 
-53. Class: ".o_small > .o_translate_inline"
-   - "Terms of Use"
-   - "Cookie Policy"
+33. Class: "LABEL > SPAN"
+   - "Email"
 
-54. Class: "P > .pe-1"
-   - "We use cookies to provide you a better user experience on this website."
-   - "We use cookies to provide you a better user experience on this website."
+34. Class: "LABEL > .hs-form-required"
+   - "*"
 
-55. Class: "P > .o_cookies_bar_text_policy.btn.btn-link.btn-sm.px-0"
-   - "Cookie Policy"
-   - "Cookie Policy"
+35. Class: ".copyright > SPAN"
+   - "© Copyright & 2025 NoTraffic"
 
-56. Class: ".col-lg-4.text-end.pt16.pb16 > .js_close_popup.btn.btn-outline-primary.rounded-circle.btn-sm.px-2"
-   - "Only essentials"
-   - "Only essentials"
+36. Class: ".copyright > A"
+   - "Terms & Conditions"
 
-57. Class: ".col-lg-4.text-end.pt16.pb16 > .js_close_popup.btn.btn-outline-primary.rounded-circle.btn-sm"
-   - "I agree"
-   - "I agree"
+37. Class: ".footer__bottom > .by"
+   - "by"
 
-58. Class: ".navbar-brand.h4.my-0.me-auto > A"
-   - "All Jobs"
-   - "All Jobs"
+38. Class: ".by > SPAN"
+   - "Designed"
 
-59. Class: ".col-md-9 > H1"
-   - "Senior Antenna / Array Design Engineer"
-   - "Administrative Manager"
-
-60. Class: ".text-center > .btn.btn-primary.btn-lg"
-   - "Apply Now!"
-   - "Apply Now!"
-
-61. Class: "DIV > H3"
-   - "Description"
-   - "Requirements"
-
-62. Class: "DIV > P"
-   - "RADWIN is looking for a(50% position) to ensure the smooth day-to-day operations of our office."
-   - "If you’re someone who loves creating an efficient, welcoming, and engaging work environment, we’d love to meet you!"
-
-63. Class: "DIV > .ql-align-justify"
-   - "RADWIN is seeking passionate Firmware engineer with 5–8 years of experience in developing Wi-Fi firmware. The role involves working on embedded software development for Wi-Fi 6/7 chipsets, focusing on Upper MAC/Lower MAC, Data and Control Paths, and performance optimization within RTOS environments. You will be part of the new RADWIN Firmware Innovation Centre in Chennai contributing to high performance wireless solutions."
-   - "RADWIN is seeking passionate Firmware Tech Lead Engineer with 5–8 years of experience in developing Wi-Fi firmware. The role involves working on embedded software development for Wi-Fi 6/7 chipsets, focusing on Upper MAC/Lower MAC, Data and Control Paths, and performance optimization within RTOS environments. You will be part of the new RADWIN Firmware Innovation Center in Chennai contributing to high performance wireless solutions."
+39. Class: ".suggestEmployee.gray-medium > SPAN"
+   - "Employee at NoTraffic?"
