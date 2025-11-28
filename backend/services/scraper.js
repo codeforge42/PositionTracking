@@ -325,7 +325,7 @@ const Scraper = async (name, url, apiKey, step, links) => {
     }
 
     console.log("jobAnchors", jobAnchors.length);
-    let json = jobAnchors
+    let json = jobAnchors.filter(a => !links.some(l => l.includes(a.url)))
         .map((a) => {
           return {title: a.job_title, company: a.company_name, link: a.url}
         })

@@ -12,7 +12,6 @@ router.post('/login', async (req, res) => {
     
     // Check if user exists
     const user = await User.getByEmail(email);
-    console.log(user);
     if (!user) {
       return res.status(400).json({ success: false, message: 'Invalid credentials' });
     }
