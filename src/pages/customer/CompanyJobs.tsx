@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,12 +9,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import { getCustomerById } from "@/services/customers-api";
 import { deleteRecords } from '../../services/custonmers-companies-api';
 import { Company, Job } from "@/types";
 import { ArrowLeft, ExternalLink } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
 
 const CompanyJobs = () => {
@@ -24,7 +24,27 @@ const CompanyJobs = () => {
   const [company, setCompany] = useState<Company | null>(null);
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
+  const [sourceType, setSourceType] = useState<"website" | "linkedin">("website");
   const { user } = useAuth();
+
+  // Filter jobs by source type
+  const getFilteredJobs = (type: "website" | "linkedin") => {
+    return jobs.filter((job) => {
+      const isLinkedIn = job.link.toLowerCase().includes("linkedin.com");
+      return type === "linkedin" ? isLinkedIn : !isLinkedIn;
+    });
+  };
+
+  // Count jobs by source
+  const websiteJobsCount = useMemo(() => 
+    jobs.filter((job) => !job.link.toLowerCase().includes("linkedin.com")).length,
+    [jobs]
+  );
+  
+  const linkedinJobsCount = useMemo(() => 
+    jobs.filter((job) => job.link.toLowerCase().includes("linkedin.com")).length,
+    [jobs]
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -70,10 +90,15 @@ const CompanyJobs = () => {
 
   
     const handleDeleteRecords = async () => {
-  
+      if (!user || !company) return;
+      
       try {
         await deleteRecords(user.id, company.id);
         setJobs([]);
+        toast({
+          title: 'Success',
+          description: 'Records deleted successfully.',
+        });
       } catch (error) {
         toast({
           title: 'deletion failed',
@@ -86,6 +111,59 @@ const CompanyJobs = () => {
   const formatDate = (dateString: string | null) => {
     if (!dateString) return "Never";
     return new Date(dateString).toLocaleString();
+  };
+
+  // Render job table rows
+  const renderJobRows = (jobsToRender: Job[]) => {
+    const yesJobs = jobsToRender.filter((job) => job.description.includes("Yes,"));
+    const noJobs = jobsToRender.filter((job) => !job.description.includes("Yes,"));
+
+    return (
+      <>
+        {yesJobs.map((job) => (
+          <TableRow
+            key={job.id}
+            className="border-l-4 border-l-emerald-500"
+            style={{ borderLeftWidth: "4px" }}
+          >
+            <TableCell className="font-medium">{job.title}</TableCell>
+            <TableCell className="max-w-md truncate">{job.description}</TableCell>
+            <TableCell>
+              <a
+                href={job.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:text-blue-800 inline-flex items-center gap-1"
+              >
+                View Job
+                <ExternalLink className="h-3 w-3" />
+              </a>
+            </TableCell>
+          </TableRow>
+        ))}
+        {noJobs.map((job) => (
+          <TableRow
+            key={job.id}
+            className="border-l-4 border-l-red-500"
+            style={{ borderLeftWidth: "4px" }}
+          >
+            <TableCell className="font-medium">{job.title}</TableCell>
+            <TableCell className="max-w-md truncate">{job.description}</TableCell>
+            <TableCell>
+              <a
+                href={job.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:text-blue-800 inline-flex items-center gap-1"
+              >
+                View Job
+                <ExternalLink className="h-3 w-3" />
+              </a>
+            </TableCell>
+          </TableRow>
+        ))}
+      </>
+    );
   };
 
   if (loading) {
@@ -135,7 +213,10 @@ const CompanyJobs = () => {
                 : "Not Scanned"}
             </div>
             <div>
-              <span className="font-medium">Jobs Found:</span> {jobs.length}
+              <span className="font-medium">Total Jobs:</span> {jobs.length} 
+              <span className="ml-4 text-gray-500">
+                (Website: {websiteJobsCount}, LinkedIn: {linkedinJobsCount})
+              </span>
             </div>
           </div>
         </div>
@@ -144,107 +225,86 @@ const CompanyJobs = () => {
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-xl font-semibold">Job Listings</h3>
             <Button
-            variant="default"
-            onClick={handleDeleteRecords}
-            className="flex items-center gap-2 h-9 px-4"
-          >
-            Delete Records
-          </Button>
+              variant="default"
+              onClick={handleDeleteRecords}
+              className="flex items-center gap-2 h-9 px-4"
+            >
+              Delete Records
+            </Button>
           </div>
 
-          {jobs.length === 0 ? (
-            <div className="text-center py-10 border rounded-lg">
-              <h3 className="text-lg font-medium text-gray-700">
-                No job listings found
-              </h3>
-              <p className="text-gray-500 mt-1">
-                There are no job listings available for this company yet.
-              </p>
-            </div>
-          ) : (
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Job Title</TableHead>
-                    <TableHead>Description</TableHead>
-                    {/* <TableHead>Posted Date</TableHead> */}
-                    <TableHead>Link</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {jobs.map((job) => {
-                    if (job.description.includes("Yes,")) {
-                      return (
-                        <TableRow
-                          key={job.id}
-                          className={cn(
-                            job.description.includes("Yes,")
-                              ? "border-l-4 border-l-emerald-500"
-                              : "border-l-4 border-l-red-500"
-                          )}
-                          style={{ borderLeftWidth: "4px" }}
-                        >
-                          <TableCell className="font-medium">
-                            {job.title}
-                          </TableCell>
-                          <TableCell className="max-w-md truncate">
-                            {job.description}
-                          </TableCell>
-                          <TableCell>
-                            <a
-                              href={job.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-blue-600 hover:text-blue-800 inline-flex items-center gap-1"
-                            >
-                              View Job
-                              <ExternalLink className="h-3 w-3" />
-                            </a>
-                          </TableCell>
+          <Tabs value={sourceType} onValueChange={(value) => setSourceType(value as "website" | "linkedin")} className="w-full">
+            <TabsList className="mb-4">
+              <TabsTrigger value="website">
+                Website ({websiteJobsCount})
+              </TabsTrigger>
+              <TabsTrigger value="linkedin">
+                LinkedIn ({linkedinJobsCount})
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="website" className="mt-0">
+              {(() => {
+                const websiteJobs = getFilteredJobs("website");
+                return websiteJobs.length === 0 ? (
+                  <div className="text-center py-10 border rounded-lg">
+                    <h3 className="text-lg font-medium text-gray-700">
+                      No website job listings found
+                    </h3>
+                    <p className="text-gray-500 mt-1">
+                      There are no website job listings available for this company yet.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="overflow-x-auto">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>Job Title</TableHead>
+                          <TableHead>Description</TableHead>
+                          <TableHead>Link</TableHead>
                         </TableRow>
-                      );
-                    }
-                    return null; // Skip rendering if the condition is not met
-                  })}
-                  {jobs.map((job) => {
-                    if (!job.description.includes("Yes,")) {
-                      return (
-                        <TableRow
-                          key={job.id}
-                          className={cn(
-                            job.description.includes("Yes,")
-                              ? "border-l-4 border-l-emerald-500"
-                              : "border-l-4 border-l-red-500"
-                          )}
-                          style={{ borderLeftWidth: "4px" }}
-                        >
-                          <TableCell className="font-medium">
-                            {job.title}
-                          </TableCell>
-                          <TableCell className="max-w-md truncate">
-                            {job.description}
-                          </TableCell>
-                          <TableCell>
-                            <a
-                              href={job.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-blue-600 hover:text-blue-800 inline-flex items-center gap-1"
-                            >
-                              View Job
-                              <ExternalLink className="h-3 w-3" />
-                            </a>
-                          </TableCell>
+                      </TableHeader>
+                      <TableBody>
+                        {renderJobRows(websiteJobs)}
+                      </TableBody>
+                    </Table>
+                  </div>
+                );
+              })()}
+            </TabsContent>
+
+            <TabsContent value="linkedin" className="mt-0">
+              {(() => {
+                const linkedinJobs = getFilteredJobs("linkedin");
+                return linkedinJobs.length === 0 ? (
+                  <div className="text-center py-10 border rounded-lg">
+                    <h3 className="text-lg font-medium text-gray-700">
+                      No LinkedIn job listings found
+                    </h3>
+                    <p className="text-gray-500 mt-1">
+                      There are no LinkedIn job listings available for this company yet.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="overflow-x-auto">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>Job Title</TableHead>
+                          <TableHead>Description</TableHead>
+                          <TableHead>Link</TableHead>
                         </TableRow>
-                      );
-                    }
-                    return null; // Skip rendering if the condition is not met
-                  })}
-                </TableBody>
-              </Table>
-            </div>
-          )}
+                      </TableHeader>
+                      <TableBody>
+                        {renderJobRows(linkedinJobs)}
+                      </TableBody>
+                    </Table>
+                  </div>
+                );
+              })()}
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
     </div>
