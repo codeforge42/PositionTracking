@@ -306,7 +306,7 @@ const Scraper = async (name, url, apiKey, step, links) => {
           }
         );
 
-        if (response.status === 200 && response.data.length > 0) {
+        if (response.status === 200) {
           console.log("✅ Snapshot is ready! Data:");
           jobAnchors = response.data;
           console.log('Data:', jobAnchors);
@@ -353,12 +353,12 @@ const Scraper = async (name, url, apiKey, step, links) => {
             num: 10,
           },
         });
-        const links = serpRes.data.organic_results || [];
+        const serpLinks = serpRes.data.organic_results || [];
         let prompt = `
           A user is looking for the most direct job listings page on this company's website (${domain}).
           Here are candidate URLs from a Google search:
   
-          ${links.map((l) => `- ${l.title}: ${l.link}`).join("\n")}
+          ${serpLinks.map((l) => `- ${l.title}: ${l.link}`).join("\n")}
   
           Return only the single best URL that:
           - Lists all current job openings
@@ -406,7 +406,7 @@ const Scraper = async (name, url, apiKey, step, links) => {
     for (const frame of frames) {
       let frameAnchors = {};
       try {
-        if (step == 1 && !url.includes("kelloggcareers")) {
+        if (step == 1 && !url.includes("kelloggcareers") && !url.includes("fixify")) {
           const navigatingElements = await frame.$$("a");
           for (const handle of navigatingElements) {
             const text = await handle.evaluate((el) =>
@@ -704,7 +704,6 @@ const Scraper = async (name, url, apiKey, step, links) => {
     else if (page.url().includes("atakama"))
       selector =
         ".wp-block-group.wow.fadeIn.is-layout-constrained.wp-container-core-group-is-layout-c9f28598.wp-block-group-is-layout-constrained > h3";
-
     let jobAnchors = await findItem(page, selector);
 
     console.log("Initial jobAnchors", jobAnchors);
@@ -804,7 +803,7 @@ const Scraper = async (name, url, apiKey, step, links) => {
       // Add the extracted anchors to the jobAnchors array
       frameAnchors.forEach((a) => jobAnchors.push(a));
     }
-    
+    console.log('links -> ', links);
     urlcontext = (Array.isArray(jobAnchors) ? jobAnchors : [])
       .filter((a) => !links.some((l) => l.includes(a.href)))
       .map((a) => {

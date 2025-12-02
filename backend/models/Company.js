@@ -99,11 +99,11 @@ class Company {
             description: ''
           };
           if (apiKey) {
-            const result = await Classifier_Obj.classifyJobPosting(jobPosting, options);
+            // const result = await Classifier_Obj.classifyJobPosting(jobPosting, options);
             classified_jobList.push({
               id: crypto.randomBytes(16).toString('hex'),
               title: job.title,
-              description: result,
+              description: "",
               link: job.link,
               found: now
             });
