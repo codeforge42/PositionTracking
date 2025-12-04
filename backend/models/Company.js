@@ -58,7 +58,7 @@ class Company {
     }
     const apiKey = process.env.OPENAI_API_KEY || '';
     const Classifier_Obj = new Classifier(apiKey);
-    let classified_jobList = [], WebsitejobList = [], LinkedinjobList = [], jobList = [];
+    let classified_jobList = [], WebsitejobList = [], LinkedinjobList = [], jobList = [], jobRemoved = [];
     const options = {
       customPrompt:
         'Analyze the following job posting. Does it describe a technical position like Software, Architect, Developer, QA, AQA, or DevOps,  programming, IT, data science, engineering, deploying, or Telecomunication similar technical skills including technical leader, IT Helpdesk? If yes, return a short explanation; if not, respond with "No match". Enterprise Account Manager, Business Development Representative arenot technical',
@@ -67,14 +67,18 @@ class Company {
     for (const company of companies) {
       if (company.id.includes(companyId)) {
         // Await the Scraper function
-        const links = [];
-        company.jobs.map(job => links.push(job.link));
-        WebsitejobList = await Scraper(company.name, company.website, apiKey, 1, links);
+        const websitelinks = [], linkedinlinks = [];
+        company.jobs.map(job => {
+          if (job.link.includes('linkedin.com')) linkedinlinks.push(job.link);
+          else websitelinks.push(job.link);
+        });
+        WebsitejobList = await Scraper(company.name, company.website, apiKey, 1, websitelinks);
         if (WebsitejobList.found != 1) {
+          const jobRemovedForPartlist = links;
           if (JSON.parse(WebsitejobList.matches).length > 0) {
             let Jobs = [], PartList, Joblinks = [];
             for (const url of JSON.parse(WebsitejobList.matches)) {
-              PartList = await Scraper(company.name, url, apiKey, 2, links);
+              PartList = await Scraper(company.name, url, apiKey, 2, websitelinks);
     
               JSON.parse(PartList.jobs).map(job => {
                 if (Joblinks.filter(j => j == job.link).length == 0) {
@@ -82,13 +86,15 @@ class Company {
                   Joblinks.push(job.link);
                 }
               });
+              jobRemovedForPartlist = jobRemovedForPartlist.filter(l => !JSON.parse(PartList.removed || '[]').some(r => r == l));
             }
-            WebsitejobList = { found: 1, jobs: JSON.stringify(Jobs) };
+            WebsitejobList = { found: 1, jobs: JSON.stringify(Jobs), removed: JSON.stringify(jobRemovedForPartlist)};
           }
         }
-        LinkedinjobList = await Scraper(company.name, company.linkedin, apiKey, 2, links);
+        LinkedinjobList = await Scraper(company.name, company.linkedin, apiKey, 2, linkedinlinks);
     
         jobList = [...JSON.parse(WebsitejobList.jobs), ...JSON.parse(LinkedinjobList.jobs)];
+        jobRemoved = [...JSON.parse(WebsitejobList.removed || '[]'), ...JSON.parse(LinkedinjobList.removed || '[]')];
         
         const now  = new Date();
         classified_jobList = [];
@@ -119,7 +125,9 @@ class Company {
         }
     
         console.log('classifying completed');
-        company.jobs = [...company.jobs, ...classified_jobList];
+        const left = company.jobs.filter(j => !jobRemoved.some(r => r == j.link));
+        console.log('left', left);
+        company.jobs = [...left, ...classified_jobList];
         company.last_scan_date = now.toISOString();
         result = company;
       }

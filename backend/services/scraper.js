@@ -240,57 +240,102 @@ const Scraper = async (name, url, apiKey, step, links) => {
   let urlcontext = "",
     prompt = "";
   if (url.includes("linkedin")) {
-    // LinkedIn URLs can contain the company as a query param (keywords)
-    // or as a path segment like /company/videocites/jobs/.
-    const parsedUrl = new URL(url);
-    let companyName = name;
-
-    // If no keywords param, try to extract from the pathname segments
-    if (!companyName) {
+      const linkedinurlforAll = fs.readFileSync("linkedinurlforAll.txt", "utf8");
+      let companyName = '';
+      const parsedUrl = new URL(url);
       const segments = parsedUrl.pathname.split("/").filter(Boolean); // remove empty
       // Look for the segment following 'company'
       const idx = segments.indexOf("company");
       if (idx !== -1 && segments.length > idx + 1) {
         companyName = segments[idx + 1];
       }
-    }
+      // Normalize LinkedIn company URL to the company profile page
+      // e.g. convert https://www.linkedin.com/company/moonee/jobs/ -> https://www.linkedin.com/company/moonee/
+      let companyProfileUrl = null;
+      if (companyName) {
+        companyProfileUrl = `${parsedUrl.protocol}//${parsedUrl.host}/company/${companyName}/`;
+        // use the profile URL for subsequent API calls that expect the company page
+        url = companyProfileUrl;
+      }
+      const jobPageUrl = JSON.parse(linkedinurlforAll);
+      let snapshot_id;
+      if (!jobPageUrl[companyName]) {
+        await axios
+          .post(
+            `https://api.brightdata.com/datasets/v3/trigger?dataset_id=gd_l1vikfnt1wgvvqz95w&include_errors=true`,
+            {"url": url},
+            {
+              headers: {
+                Authorization: `Bearer ${brightKey}`,
+                "Content-Type": "application/json",
+              },
+            }
+          )
+          .then((response) => {
+            snapshot_id = response.data.snapshot_id;
+            console.log(response.data);
+          })
+          .catch((error) => console.error(error));
 
-    console.log("company : ", companyName);
-    if (!companyName) return { found: 1, jobs: "[]" };
+        for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+          try {
+            console.log(`⏳ Attempt ${attempt}: Fetching snapshot data...`);
 
-    const data = [
-      {
-        location: "WorldWide",
-        keyword: "",
-        country: "",
-        time_range: "",
-        job_type: "",
-        experience_level: "",
-        remote: "",
-        company: companyName,
-        location_radius: "",
-      },
-    ];
+            const response = await axios.get(
+              `https://api.brightdata.com/datasets/v3/snapshot/${snapshot_id}?format=json`,
+              {
+                headers: {
+                  Authorization: `Bearer ${brightKey}`,
+                },
+                timeout: 15000 // 15s timeout to avoid hanging
+              }
+            );
 
-    let jobAnchors = [],
-      snapshot_id = "";
-
-    await axios
-      .post(
-        `https://api.brightdata.com/datasets/v3/trigger?dataset_id=gd_lpfll7v5hcqtkxl6l&include_errors=true&type=discover_new&discover_by=keyword`,
-        data,
-        {
-          headers: {
-            Authorization: `Bearer ${brightKey}`,
-            "Content-Type": "application/json",
-          },
+            if (response.status === 200) {
+              console.log("✅ Snapshot is ready! Data:");
+              companyData = response.data;
+              console.log('Data:', companyData);
+              jobPageUrl[companyName] = `https://www.linkedin.com/jobs/${companyData[0].name}-jobs-worldwide?f_C=${companyData[0].company_id}`;
+              fs.writeFileSync(
+                "linkedinurlforAll.txt",
+                JSON.stringify(jobPageUrl, null, 2),
+                "utf8"
+              );
+              break;
+            } else {
+              console.log(
+                "⚠️ Snapshot not ready yet (empty response), retrying..."
+              );
+            }
+          } catch (err) {
+            console.log(`⚠️ Error on attempt ${attempt}: ${err.message}`);
+            break;
+          }
+          // Wait before next try
+          await delay(DELAY_MS);
         }
-      )
-      .then((response) => {
-        snapshot_id = response.data.snapshot_id;
-        console.log(response.data);
-      })
-      .catch((error) => console.error(error));
+      }
+
+    if (!jobPageUrl[companyName]) return { found: 1, jobs: "[]" };
+
+    
+    await axios
+        .post("https://api.brightdata.com/datasets/v3/trigger?dataset_id=gd_lpfll7v5hcqtkxl6l&include_errors=true&type=discover_new&discover_by=url",
+          { url: jobPageUrl[companyName] },
+          {
+            headers: {
+              "Authorization": "Bearer 00af2aac5429b88e7c595f0090606d12abae32445f73502e3503ea37b724c9ad",
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response.data);
+          snapshot_id = response.data.snapshot_id;
+        })
+        .catch((error) => console.error(error));
+
+    let jobAnchors = [];
 
     for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
       try {
@@ -325,14 +370,16 @@ const Scraper = async (name, url, apiKey, step, links) => {
     }
 
     console.log("jobAnchors", jobAnchors.length);
-    let json = jobAnchors.filter(a => !links.some(l => l.includes(a.url)))
+    let json = jobAnchors.filter(a => !(Array.isArray(links) ? links : []).some(l => l && l.includes(a.url)))
         .map((a) => {
           return {title: a.job_title, company: a.company_name, link: a.url}
         })
 
+    const removed = (Array.isArray(links) ? links : []).filter(l => l && !(Array.isArray(jobAnchors) ? jobAnchors : []).some(j => l.includes(j.url)));
+    
     console.log("Parsed JSON:", json.length);
     page.close();
-    return { found: 1, jobs: JSON.stringify(json) };
+    return { found: 1, jobs: JSON.stringify(json), removed: JSON.stringify(removed) };
   } else {
     if (step == 1) {
       const domain = new URL(url).hostname;
@@ -805,13 +852,15 @@ const Scraper = async (name, url, apiKey, step, links) => {
     }
     console.log('links -> ', links);
     urlcontext = (Array.isArray(jobAnchors) ? jobAnchors : [])
-      .filter((a) => !links.some((l) => l.includes(a.href)))
+      .filter((a) => !(Array.isArray(links) ? links : []).some((l) => l && l.includes(a.href)))
       .map((a) => {
         return !a.href.includes(a.text)
           ? `${a.text} — ${a.href}`
           : `${a.text} - ${url}`;
       })
       .join("\n");
+
+    const removed = (Array.isArray(links) ? links : []).filter(l => l && !(Array.isArray(jobAnchors) ? jobAnchors : []).some(j => l.includes(j.href)));
     fs.writeFileSync("job_links_for_llm.txt", urlcontext);
 
     const index = url.lastIndexOf("#");
@@ -917,7 +966,7 @@ Output format:
 
     page.close();
 
-    return { found: 1, jobs: JSON.stringify(json) };
+    return { found: 1, jobs: JSON.stringify(json), removed: JSON.stringify(removed) };
   }
 };
 
