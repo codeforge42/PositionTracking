@@ -1,159 +1,45 @@
-1. Class: ".button.is-top-bar > .top_banner-bttn-text"
-   - "See how"
-   - "See how"
+1. Class: ".Vd6aQZ.ignore-focus.SCROLL_TO_TOP > .mHZSwn"
+   - "top of page"
 
-2. Class: ".nav_link.is-dropdown.w-dropdown-toggle > DIV"
-   - "What we do"
-   - "How we help"
+2. Class: "DIV > .JS76Uv"
+   - "Solution"
+   - "Partners"
 
-3. Class: ".nav_link-dropdown_link.w-inline-block > DIV"
-   - "Overview"
-   - "Why Fixify"
+3. Class: ".R_TAzU > DIV"
+   - "Use tab to navigate through the menu items."
 
-4. Class: ".nav_link-dropdown_link.hide.w-inline-block > DIV"
-   - "MSP alternatives"
-   - "Resource library"
+4. Class: ".font_0.wixui-rich-text__text > .wixui-rich-text__text"
+   - "Careers Page"
 
-5. Class: ".nav_main-link_wrapper > .nav_link.w-nav-link"
-   - "Pricing"
-   - "Pricing"
+5. Class: ".color_36.wixui-rich-text__text > .wixui-rich-text__text"
+   - "Pomvom"
 
-6. Class: ".nav_link-dropdown_link.w-inline-block.w--current > DIV"
-   - "Careers"
-   - "Careers"
+6. Class: ".wixui-rich-text__text > .wixui-rich-text__text"
+   - "​"
+   - "Home"
 
-7. Class: ".button.is-secondary.w-inline-block > DIV"
-   - "Free mini audit"
-   - "Free mini audit"
+7. Class: ".inherit-font-size.wixui-rich-text__text > .wixui-rich-text__text"
+   - "​"
+   - "​"
 
-8. Class: ".button.w-inline-block > DIV"
-   - "Book a demo"
-   - "Book a demo"
+8. Class: ".wixui-rich-text__text > .color_36.wixui-rich-text__text"
+   - "Legal & Privacy"
+   - "Terms & Conditions"
 
-9. Class: ".heading-content > H1"
-   - "Be a part of the Fixify story"
-   - "Be a part of the Fixify story"
+9. Class: ".wixui-rich-text__text > .wixGuard.wixui-rich-text__text"
+   - "​"
 
-10. Class: ".heading-content > .text-size-large"
-   - "Here at Fixify, we think we’ve got the mix of components just right: an amazing product, a phenomenal team, and an audacious mission to revolutionize IT."
-   - "Here at Fixify, we think we’ve got the mix of components just right: an amazing product, a phenomenal team, and an audacious mission to revolutionize IT."
+10. Class: ".inherit-font-size.wixui-rich-text__text > .wixGuard.wixui-rich-text__text"
+   - "​"
 
-11. Class: ".button.w-inline-block.w--current > DIV"
-   - "See our open roles"
-   - "View open roles"
+11. Class: ".Vd6aQZ.ignore-focus.SCROLL_TO_BOTTOM > .mHZSwn"
+   - "bottom of page"
 
-12. Class: ".heading-content > H2"
-   - "We’re here to help"
-   - "We’re here to help"
+12. Class: ".npzmUu > .consent-banner-description._0zrzs"
+   - "We use cookies on our website to see how you interact with it. By accepting, you agree to our use of cookies."
 
-13. Class: ".career-values_list-item > .text-size-medium"
-   - "We want to help our customers solve their problems"
-   - "We want to help our employees grow and prosper"
-
-14. Class: ".center-heading-content.max-width-large > H2"
-   - "Our benefits"
-   - "Our benefits"
-
-15. Class: ".tab_link.w-inline-block.w-tab-link.w--current > DIV"
-   - "US benefits"
-   - "US benefits"
-
-16. Class: ".tab_link.w-inline-block.w-tab-link > DIV"
-   - "IRE benefits"
-   - "IRE benefits"
-
-17. Class: ".card_item-2 > .heading-style-h5-3"
-   - "Flexible work environment"
-   - "Healthcare insurance"
-
-18. Class: ".card_item-2 > P"
-   - "Flexibility to work remote while staying connected through company events"
-   - "Comprehensive medical, dental, and vision coverage with 100% of your deductible covered by Fixify, plus pre-tax savings options"
-
-19. Class: ".card_item-2.hide > .heading-style-h5-3"
-   - "Home office stipend"
-   - "Home office stipend"
-
-20. Class: ".card_item-2.hide > P"
-   - "Up to $1,000 to set up your perfect workspace"
-   - "Up to $1,000 to set up your perfect workspace"
-
-21. Class: ".center-heading-content > H2"
-   - "What to expect"
-   - "Want to join our team of Fixins?"
-
-22. Class: "H2 > .span-wrapper"
-   - "when you apply"
-   - "when you apply"
-
-23. Class: ".span-hide > .heading-style-h2"
-   - "when you apply"
-   - "when you apply"
-
-24. Class: ".card_item-step_image-number > DIV"
-   - "1"
-   - "2"
-
-25. Class: ".card_item.is-steps > .heading-style-h5"
-   - "You apply"
-   - "Phone convo"
-
-26. Class: ".card_item.is-steps > P"
-   - "A real person (not a machine) will read your letter, resume, and LinkedIn profile."
-   - "We’ll have a quick chat to ensure the role is a good fit and set expectations for the interview."
-
-27. Class: ".center-heading-content > .text-size-medium"
-   - "Check out our current openings:"
-   - "Check out our current openings:"
-
-28. Class: ".heading-content > .heading-style-h5-2"
-   - "Enterprise Account Executive"
-   - "Enterprise Account Executive"
-
-29. Class: ".career-board_detail-item > .heading-style-h6-2"
-   - "Full-Time"
-   - "Remote (East Coast)"
-
-30. Class: ".button.w-inline-block.is-secondary > DIV"
-   - "View job"
-   - "View job"
-
-31. Class: ".footer_link-item > .button"
-   - "Contact us"
-   - "Contact us"
-
-32. Class: ".footer_column > .footer_column-header.text-style-muted"
-   - "What we do"
-   - "How we help"
-
-33. Class: ".footer_column > .footer_link"
-   - "Overview"
-   - "Why Fixify"
-
-34. Class: ".footer_column > .footer_link.hide"
-   - "MSP alternatives"
-   - "MSP alternatives"
-
-35. Class: ".footer_link-item > .footer_link"
-   - "About us"
-   - "Trust"
-
-36. Class: ".footer_link-item > .footer_link.w--current"
-   - "Careers"
-   - "Careers"
-
-37. Class: ".footer_link-item.hide > .footer_link"
-   - "Resource library"
-   - "Resource library"
-
-38. Class: ".footer_legal-wrapper > .footer_credits"
-   - "©Fixify. All rights reserved."
-   - "©Fixify. All rights reserved."
-
-39. Class: ".footer_credits > SPAN"
-   - "2025"
-   - "2025"
-
-40. Class: ".footer3_legal-list > .footer_link.is-last-row"
+13. Class: ".consent-banner-description._0zrzs > .x8ImWz"
    - "Privacy Policy"
-   - "Cookie Policy"
+
+14. Class: ".consent-banner-buttons.gRqfAK.i6e3w1 > .ogAEw2.bqbmwD"
+   - "Settings"

@@ -30,19 +30,19 @@ const CompanyJobs = () => {
   // Filter jobs by source type
   const getFilteredJobs = (type: "website" | "linkedin") => {
     return jobs.filter((job) => {
-      const isLinkedIn = job.link.toLowerCase().includes("linkedin.com");
+      const isLinkedIn = job.link?.toLowerCase().includes("linkedin.com");
       return type === "linkedin" ? isLinkedIn : !isLinkedIn;
     });
   };
 
   // Count jobs by source
   const websiteJobsCount = useMemo(() => 
-    jobs.filter((job) => !job.link.toLowerCase().includes("linkedin.com")).length,
+    jobs.filter((job) => !job.link?.toLowerCase().includes("linkedin.com")).length,
     [jobs]
   );
   
   const linkedinJobsCount = useMemo(() => 
-    jobs.filter((job) => job.link.toLowerCase().includes("linkedin.com")).length,
+    jobs.filter((job) => job.link?.toLowerCase().includes("linkedin.com")).length,
     [jobs]
   );
 

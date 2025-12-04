@@ -1,5 +1,6 @@
 {
   "moonee": "https://www.linkedin.com/jobs/Moonee-jobs-worldwide?f_C=19165823",
   "ritual-vitamins": "https://www.linkedin.com/jobs/Ritual-jobs-worldwide?f_C=15185142",
-  "hifixify": "https://www.linkedin.com/jobs/Fixify-jobs-worldwide?f_C=99062951"
+  "hifixify": "https://www.linkedin.com/jobs/Fixify-jobs-worldwide?f_C=99062951",
+  "pomvom": "https://www.linkedin.com/jobs/Pomvom[TASE:PMVM]-jobs-worldwide?f_C=18007379"
 }

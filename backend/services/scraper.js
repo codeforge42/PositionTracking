@@ -295,7 +295,7 @@ const Scraper = async (name, url, apiKey, step, links) => {
               console.log("✅ Snapshot is ready! Data:");
               companyData = response.data;
               console.log('Data:', companyData);
-              jobPageUrl[companyName] = `https://www.linkedin.com/jobs/${companyData[0].name}-jobs-worldwide?f_C=${companyData[0].company_id}`;
+              jobPageUrl[companyName] = `https://www.linkedin.com/jobs/${companyData[0].name.replace(/\s+/g, '')}-jobs-worldwide?f_C=${companyData[0].company_id}`;
               fs.writeFileSync(
                 "linkedinurlforAll.txt",
                 JSON.stringify(jobPageUrl, null, 2),
@@ -739,18 +739,95 @@ const Scraper = async (name, url, apiKey, step, links) => {
     }
 
     console.log("selectorArray", selectorArray);
-    if (selectorArray.length == 0) return { found: 1, jobs: "[]" };
 
     let selector = "";
-    for (predictedClassName of selectorArray) {
-      selector += predictedClassName + ",";
-    }
-    if (selector.at(-1) == ",") selector = selector.slice(0, -1);
 
-    if (page.url().includes("radiflow")) selector = "a";
-    else if (page.url().includes("atakama"))
-      selector =
-        ".wp-block-group.wow.fadeIn.is-layout-constrained.wp-container-core-group-is-layout-c9f28598.wp-block-group-is-layout-constrained > h3";
+    // Handling no href case
+    if (page.url().includes("pomvom")) {
+      selector = "div.target-job-title.text-xl.font-semibold";
+      let candidates = [], jobs = [];
+      try {
+        try {
+          console.log("Querying selector:", selector);
+          // First try main frame
+          candidates = await page.$$(selector);
+          console.log("Main frame found:", candidates.length);
+          
+          // If main frame returns nothing, try all frames
+          if (candidates.length === 0) {
+            console.log("Trying frames...");
+            const allFrames = page.frames();
+            for (const frame of allFrames) {
+              try {
+                const frameCandidates = await frame.$$(selector);
+                if (frameCandidates.length > 0) {
+                  console.log(`Found ${frameCandidates.length} in frame: ${frame.url()}`);
+                  candidates = frameCandidates;
+                  break;
+                }
+              } catch (e) {
+                // Frame might be cross-origin, skip
+                continue;
+              }
+            }
+          }
+        } catch (err) {
+          if (err.message.includes("Execution context was destroyed")) {
+            console.warn("⏳ Retrying after context destruction...");
+            await page.waitForLoadState("domcontentloaded"); // give time to settle
+            candidates = await page.$$(selector); // retry once
+          } else {
+            throw err;
+          }
+        }
+      } catch (err) {
+        console.warn(
+          "⚠️ Failed to query candidates after navigation:",
+          err.message
+        );
+      }
+
+      console.log("candidates found:", candidates.length);
+
+      for (let i = 0; i < candidates.length; i++) {
+        let a = candidates[i];
+        try {
+          if (!a) continue;
+          const { title, company, link } = await a.evaluate((el, url) => {
+            const attrs = {};
+
+            for (const attr of el.attributes) {
+              attrs[attr.name] = attr.value;
+            }
+
+            return {
+              title: el.textContent.trim(),
+              company: "",
+              link: attrs['href'] || url,
+            };
+          }, url);
+          jobs.push({title, company, link});
+        } catch (err) {
+          console.warn(`⚠️ Skipped candidate due to:`, err.message);
+        }
+      }
+      const removed = (Array.isArray(links) ? links : []).filter(l => l && !(Array.isArray(jobs) ? jobs : []).some(j => l.includes(j.link)));
+      jobs = jobs.filter((a) => !(Array.isArray(links) ? links : []).some((l) => l && l.includes(a.link)));
+      return { found: 1, jobs: JSON.stringify(jobs), removed: JSON.stringify(removed) };
+    }
+    else {
+      if (selectorArray.length == 0) return { found: 1, jobs: "[]" };
+      for (predictedClassName of selectorArray) {
+        selector += predictedClassName + ",";
+      }
+      if (selector.at(-1) == ",") selector = selector.slice(0, -1);
+
+      if (page.url().includes("radiflow")) selector = "a";
+      else if (page.url().includes("atakama"))
+        selector =
+          ".wp-block-group.wow.fadeIn.is-layout-constrained.wp-container-core-group-is-layout-c9f28598.wp-block-group-is-layout-constrained > h3";
+    }
+    
     let jobAnchors = await findItem(page, selector);
 
     console.log("Initial jobAnchors", jobAnchors);
