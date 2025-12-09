@@ -93,11 +93,22 @@ const CompanyJobs = () => {
       if (!user || !company) return;
       
       try {
-        await deleteRecords(user.id, company.id);
-        setJobs([]);
+        await deleteRecords(user.id, company.id, sourceType);
+        // Update jobs state to remove deleted jobs
+        const filteredJobs = jobs.filter((job) => {
+          const isLinkedIn = job.link?.toLowerCase().includes("linkedin.com");
+          if (sourceType === "linkedin") {
+            // Keep website jobs, remove LinkedIn jobs
+            return !isLinkedIn;
+          } else {
+            // Keep LinkedIn jobs, remove website jobs
+            return isLinkedIn;
+          }
+        });
+        setJobs(filteredJobs);
         toast({
           title: 'Success',
-          description: 'Records deleted successfully.',
+          description: `${sourceType === 'linkedin' ? 'LinkedIn' : 'Website'} records deleted successfully.`,
         });
       } catch (error) {
         toast({
@@ -196,7 +207,7 @@ const CompanyJobs = () => {
           <h2 className="text-2xl font-bold text-gray-800">{company.name}</h2>
           <div className="flex flex-wrap gap-x-6 gap-y-2 mt-2 text-sm text-gray-600">
             <div>
-              <span className="font-medium">Career URL:</span>{" "}
+              <span className="font-medium">Website:</span>{" "}
               <a
                 href={company.website}
                 target="_blank"

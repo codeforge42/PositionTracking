@@ -1,45 +1,82 @@
-1. Class: ".Vd6aQZ.ignore-focus.SCROLL_TO_TOP > .mHZSwn"
-   - "top of page"
+1. Class: ".relative.m-0 > .relative.z-[100].text-[2.8rem].lg:text-[1.4rem].font-bold.lg:font-normal.leading-[1.1].lg:leading-[-0.85].tracking-[-0.5%].text-[var(--gray)].hover:text-black.flex.justify-between.items-center"
+   - "Why Appcharge"
 
-2. Class: "DIV > .JS76Uv"
-   - "Solution"
-   - "Partners"
+2. Class: ".inline-flex.items-center.justify-center.gap-2.whitespace-nowrap.rounded-full.text-base.font-medium.leading-[1.25].transition-all.disabled:pointer-events-none.disabled:opacity-50.[&_svg]:pointer-events-none.[&_svg:not([class*='size-'])]:size-4.shrink-0.[&_svg]:shrink-0.focus-visible:border-ring.focus-visible:ring-ring/50.focus-visible:ring-[3px].aria-invalid:ring-destructive/20.dark:aria-invalid:ring-destructive/40.aria-invalid:border-destructive.px-[2.3rem].pt-[1rem].pb-[1.2rem].group/link.text-[1.4rem].pl-0 > .relative.inline-block.after:content-[''].after:absolute.after:-bottom-[1px].after:left-0.after:h-[0.1rem].after:bg-current.after:w-0.after:transition-all.after:duration-300.after:ease-out.hover:after:w-full"
+   - "Login"
 
-3. Class: ".R_TAzU > DIV"
-   - "Use tab to navigate through the menu items."
+3. Class: ".flex.items-center > .inline-flex.items-center.justify-center.gap-2.whitespace-nowrap.rounded-full.text-base.font-medium.leading-[1.25].transition-all.disabled:pointer-events-none.disabled:opacity-50.[&_svg]:pointer-events-none.[&_svg:not([class*='size-'])]:size-4.shrink-0.[&_svg]:shrink-0.focus-visible:border-ring.focus-visible:ring-ring/50.focus-visible:ring-[3px].aria-invalid:ring-destructive/20.dark:aria-invalid:ring-destructive/40.aria-invalid:border-destructive.bg-[var(--black)].text-white.px-[2.3rem].pt-[0.6rem].pb-[0.8rem].group/link.text-[1.4rem].pl-[1.6rem].pr-[1.6rem]"
+   - "Get in touch"
 
-4. Class: ".font_0.wixui-rich-text__text > .wixui-rich-text__text"
-   - "Careers Page"
+4. Class: ".flex.flex-col.text-center.md:max-w-[83.2rem].md:mx-auto > .text-center.text-[3.6rem].md:text-[6rem]"
+   - "Join us"
 
-5. Class: ".color_36.wixui-rich-text__text > .wixui-rich-text__text"
-   - "Pomvom"
+5. Class: ".flex.flex-col.text-center.md:max-w-[83.2rem].md:mx-auto > .hidden.md:block.mb-12.md:mb-24.text-[1.6rem].md:text-[2.4rem].leading-[1.3].tracking-[-.018rem].md:mx-auto.mt-[1.8rem].md:mt-[3.6rem].max-w-[27rem].md:max-w-[48rem].mx-auto.font-medium"
+   - "We’re looking for talented creators ready to revolutionize gaming and elevate their careers with the industry’s brightest minds!"
 
-6. Class: ".wixui-rich-text__text > .wixui-rich-text__text"
-   - "​"
-   - "Home"
+6. Class: "DIV > .text-[1.8rem].leading-[1.1].tracking-[-.056rem].font-semibold"
+   - "Engineering Team Leader - Payments Platform"
+   - "Director of Product, Payments Platform"
 
-7. Class: ".inherit-font-size.wixui-rich-text__text > .wixui-rich-text__text"
-   - "​"
-   - "​"
+7. Class: ".absolute > .pill-styling"
+   - "Tel Aviv"
+   - "Tel Aviv"
 
-8. Class: ".wixui-rich-text__text > .color_36.wixui-rich-text__text"
-   - "Legal & Privacy"
-   - "Terms & Conditions"
+8. Class: ".text-left.md:max-w-[12rem].md:mr-[6rem] > .text-[1.2rem].leading-[1.05].md:leading-[1.35].tracking-[-0.5%].font-semibold.md:font-semibold.mb-[1.4rem].md:mb-[1rem]"
+   - "Products"
 
-9. Class: ".wixui-rich-text__text > .wixGuard.wixui-rich-text__text"
-   - "​"
+9. Class: "DIV > .text-[1.2rem].font-medium.leading-[1.05].md:leading-[1.25].tracking-[-0.5%].hover:text-black"
+   - "Web Store"
+   - "Game Portal"
 
-10. Class: ".inherit-font-size.wixui-rich-text__text > .wixGuard.wixui-rich-text__text"
-   - "​"
+10. Class: ".text-left.md:max-w-[12rem].md:mr-[8rem] > .text-[1.2rem].leading-[1.05].md:leading-[1.35].tracking-[-0.5%].font-semibold.md:font-semibold.mb-[1.4rem].md:mb-[1rem]"
+   - "Appcharge Platform"
 
-11. Class: ".Vd6aQZ.ignore-focus.SCROLL_TO_BOTTOM > .mHZSwn"
-   - "bottom of page"
+11. Class: ".mt-[1rem].md:mt-[0.6rem] > .text-[1.2rem].leading-[1.05].md:leading-[1.35].tracking-[-0.5%].font-semibold.md:font-semibold.break-words"
+   - "Why Appcharge"
 
-12. Class: ".npzmUu > .consent-banner-description._0zrzs"
-   - "We use cookies on our website to see how you interact with it. By accepting, you agree to our use of cookies."
+12. Class: ".text-left.md:max-w-[12rem].md:mr-[5rem] > .text-[1.2rem].leading-[1.05].md:leading-[1.35].tracking-[-0.5%].font-semibold.md:font-semibold.mb-[1.4rem].md:mb-[1rem]"
+   - "Developers"
 
-13. Class: ".consent-banner-description._0zrzs > .x8ImWz"
+13. Class: ".text-left.md:max-w-[12rem] > .text-[1.2rem].leading-[1.05].md:leading-[1.35].tracking-[-0.5%].font-semibold.md:font-semibold.mb-[1.4rem].md:mb-[1rem]"
+   - "Company"
+
+14. Class: ".w-full.text-left.md:max-w-[17rem] > .text-[1.2rem].leading-[1.05].md:leading-[1.35].tracking-[-0.5%].font-bold.md:font-semibold.mb-12.md:mb-[1.7rem]"
+   - "Connect with us"
+
+15. Class: ".flex.flex-col.gap-[0.2rem].md:gap-[1rem] > .text-[1.2rem].font-medium.leading-[1.05].md:leading-[1.25].tracking-[-0.5%].hover:text-black"
+   - "Facebook"
+   - "Linkedin"
+
+16. Class: ".h-full.flex.flex-col.gap-[2.4rem] > .inline-flex.items-center.justify-center.gap-2.whitespace-nowrap.rounded-full.text-base.font-medium.leading-[1.25].transition-all.disabled:pointer-events-none.disabled:opacity-50.[&_svg]:pointer-events-none.[&_svg:not([class*='size-'])]:size-4.shrink-0.[&_svg]:shrink-0.focus-visible:border-ring.focus-visible:ring-ring/50.focus-visible:ring-[3px].aria-invalid:ring-destructive/20.dark:aria-invalid:ring-destructive/40.aria-invalid:border-destructive.bg-[var(--black)].text-white.px-[2.3rem].pt-[0.6rem].pb-[0.8rem].group/link.mt-auto.text-[1.2rem].px-[1.6rem]"
+   - "Contact us"
+
+17. Class: ".flex.flex-col.items-start.gap-[1.2rem] > .text-[1.2rem].font-medium.leading-[1.05].md:leading-[1.25].tracking-[-0.5%].hover:text-black"
+   - "Facebook"
+   - "Linkedin"
+
+18. Class: ".w-full.flex.justify-start > .inline-flex.items-center.justify-center.gap-2.whitespace-nowrap.rounded-full.text-base.font-medium.leading-[1.25].transition-all.disabled:pointer-events-none.disabled:opacity-50.[&_svg]:pointer-events-none.[&_svg:not([class*='size-'])]:size-4.shrink-0.[&_svg]:shrink-0.focus-visible:border-ring.focus-visible:ring-ring/50.focus-visible:ring-[3px].aria-invalid:ring-destructive/20.dark:aria-invalid:ring-destructive/40.aria-invalid:border-destructive.bg-[var(--black)].text-white.px-[2.3rem].pt-[0.6rem].pb-[0.8rem].group/link.mt-auto.text-[1.2rem].px-[1.6rem]"
+   - "Contact us"
+
+19. Class: ".flex.justify-start.gap-12.mb-[1.4rem].md:mb-0.md:ml-[3.2rem] > .text-[#7D7D7D].text-[1.4rem].font-medium.leading-[1.05].md:leading-[1.25].tracking-[-0.5%].hover:text-black"
    - "Privacy Policy"
+   - "Terms of Use"
 
-14. Class: ".consent-banner-buttons.gRqfAK.i6e3w1 > .ogAEw2.bqbmwD"
-   - "Settings"
+20. Class: ".md:flex.md:flex-row-reverse > .text-[1.4rem].text-[#7D7D7D].font-medium.leading-[1.05].md:leading-[1.25].tracking-[-0.5%]"
+   - "© Appcharge2025.All rights reserved"
+
+21. Class: ".group.flex.flex-row.items-center.gap-3.cursor-pointer.bg-transparent.p-0.border-0 > .text-[1.4rem].text-[#7D7D7D].group-hover:text-black.font-medium.leading-[1.05].md:leading-[1.25].tracking-[-0.5%].transition-colors.duration-200"
+   - "English"
+
+22. Class: ".rc-anchor.rc-anchor-invisible.rc-anchor-light.rc-anchor-invisible-hover > .rc-anchor-aria-status"
+   - "Recaptcha requires verification."
+
+23. Class: ".rc-anchor-pt > A"
+   - "Privacy"
+   - "Terms"
+
+24. Class: ".rc-anchor-pt > SPAN"
+   - "-"
+   - "-"
+
+25. Class: ".rc-anchor-invisible-text > SPAN"
+   - "protected by"

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Card,
@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/card';
 import { scanCompany } from '@/services/custonmers-companies-api';
 import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Company } from '@/types';
 import { useToast } from '@/hooks/use-toast';
 import { ExternalLink, Edit, Trash2, RefreshCw } from 'lucide-react';
@@ -31,14 +32,35 @@ interface CompanyCardProps {
   company: Company;
   setCompanies: React.Dispatch<React.SetStateAction<Company[]>>;
   onDelete: (id: string) => Promise<void>;
+  isExternalScanning?: boolean;
 }
 
-const CompanyCard = ({ userId, company, setCompanies, onDelete }: CompanyCardProps) => {
+const CompanyCard = ({ userId, company, setCompanies, onDelete, isExternalScanning = false }: CompanyCardProps) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isScanning, setIsScanning] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
   const [currentCompany, setCurrentCompany] = useState(company);
+  const [scanTypes, setScanTypes] = useState<{ website: boolean; linkedin: boolean }>({
+    website: true,
+    linkedin: true,
+  });
+
+  // Sync external scanning state with internal state
+  useEffect(() => {
+    setIsScanning(isExternalScanning);
+  }, [isExternalScanning]);
+
+  // Count jobs by source
+  const websiteJobsCount = useMemo(() => 
+    currentCompany.jobs.filter((job) => !job.link?.toLowerCase().includes("linkedin.com")).length,
+    [currentCompany.jobs]
+  );
+  
+  const linkedinJobsCount = useMemo(() => 
+    currentCompany.jobs.filter((job) => job.link?.toLowerCase().includes("linkedin.com")).length,
+    [currentCompany.jobs]
+  );
 
   const formatDate = (date: Date | string | null) => {
     if (!date) return 'Never';
@@ -47,6 +69,7 @@ const CompanyCard = ({ userId, company, setCompanies, onDelete }: CompanyCardPro
 
   const formatUrl = (url: string) => {
     try {
+      if (!url) return '';
       const urlObj = new URL(url);
       return urlObj.hostname;
     } catch (e) {
@@ -58,13 +81,28 @@ const CompanyCard = ({ userId, company, setCompanies, onDelete }: CompanyCardPro
   const handleScan = async () => {
     if (isScanning) return;
 
+    // Check if at least one scan type is selected
+    if (!scanTypes.website && !scanTypes.linkedin) {
+      toast({
+        title: 'No scan type selected',
+        description: 'Please select at least one scan type (Website or LinkedIn).',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     try {
       setIsScanning(true);
       toast({
         title: 'Scanning started',
         description: `Scanning jobs for ${currentCompany.name}...`,
       });
-      const scannedCompany = await scanCompany(userId, currentCompany.id);
+      
+      const selectedTypes = [];
+      if (scanTypes.website) selectedTypes.push('website');
+      if (scanTypes.linkedin) selectedTypes.push('linkedin');
+      
+      const scannedCompany = await scanCompany(userId, currentCompany.id, selectedTypes);
       setCurrentCompany(JSON.parse(scannedCompany));
 
       toast({
@@ -136,7 +174,16 @@ const CompanyCard = ({ userId, company, setCompanies, onDelete }: CompanyCardPro
       <CardContent className="py-2">
         <div className="grid grid-cols-2 gap-3 text-sm">
           <div>
-            <p className="text-gray-500 font-medium text-xs">Career URL</p>
+            <div className="flex items-center gap-2 mb-1">
+              <Checkbox
+                id={`scan-website-${currentCompany.id}`}
+                checked={scanTypes.website}
+                onCheckedChange={(checked) =>
+                  setScanTypes((prev) => ({ ...prev, website: checked as boolean }))
+                }
+              />
+              <p className="text-gray-500 font-medium text-xs">Website ({websiteJobsCount})</p>
+            </div>
             <a
               href={currentCompany.website}
               target="_blank"
@@ -148,7 +195,16 @@ const CompanyCard = ({ userId, company, setCompanies, onDelete }: CompanyCardPro
             </a>
           </div>
           <div>
-            <p className="text-gray-500 font-medium text-xs">LinkedIn</p>
+            <div className="flex items-center gap-2 mb-1">
+              <Checkbox
+                id={`scan-linkedin-${currentCompany.id}`}
+                checked={scanTypes.linkedin}
+                onCheckedChange={(checked) =>
+                  setScanTypes((prev) => ({ ...prev, linkedin: checked as boolean }))
+                }
+              />
+              <p className="text-gray-500 font-medium text-xs">LinkedIn ({linkedinJobsCount})</p>
+            </div>
             <a
               href={currentCompany.linkedin}
               target="_blank"

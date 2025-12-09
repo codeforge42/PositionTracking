@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
-import { getCompanies, deleteCompany, scanAllCompanies, deleteAllRecords } from '../../services/custonmers-companies-api';
+import { getCompanies, deleteCompany, scanCompany, deleteAllRecords } from '../../services/custonmers-companies-api';
 import { Company } from '@/types';
 import { Plus, Search, RefreshCw } from 'lucide-react';
 import CompanyCard from '@/components/customer/CompanyCard';
@@ -12,9 +14,14 @@ import { useAuth } from '@/contexts/AuthContext';
 const CustomerDashboard = () => {
   const [companies, setCompanies] = useState<Company[]>([]);
   const [isScanning, setIsScanning] = useState(false);
+  const [currentlyScanningCompanyId, setCurrentlyScanningCompanyId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [scanTypes, setScanTypes] = useState<{ website: boolean; linkedin: boolean }>({
+    website: true,
+    linkedin: true,
+  });
   const { toast } = useToast();
   const { user } = useAuth();
 
@@ -64,21 +71,82 @@ const CustomerDashboard = () => {
 
     if (isScanning) return;
 
+    // Check if at least one scan type is selected
+    if (!scanTypes.website && !scanTypes.linkedin) {
+      toast({
+        title: 'No scan type selected',
+        description: 'Please select at least one scan type (Website or LinkedIn).',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    // Check if there are companies to scan
+    if (companies.length === 0) {
+      toast({
+        title: 'No companies to scan',
+        description: 'There are no companies available to scan.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     try {
       setIsScanning(true);
       toast({
         title: 'Scanning started',
-        description: `Scanning all companies for ${user.name}...`,
+        description: `Scanning ${companies.length} companies for ${user.name}...`,
       });
 
-      const data = await scanAllCompanies(user.id);
-      setCompanies(data);
+      const selectedTypes = [];
+      if (scanTypes.website) selectedTypes.push('website');
+      if (scanTypes.linkedin) selectedTypes.push('linkedin');
 
-      toast({
-        title: 'Scanning complete',
-        description: `Successfully scanned all companies for ${user.name}.`,
-      });
+      // Scan each company one by one
+      let updatedCompanies = [...companies];
+      let successCount = 0;
+      let failCount = 0;
+
+      for (let i = 0; i < companies.length; i++) {
+        const company = companies[i];
+        try {
+          // Set the currently scanning company ID to show scanning state in CompanyCard
+          setCurrentlyScanningCompanyId(company.id);
+          
+          const scannedCompanyStr = await scanCompany(user.id, company.id, selectedTypes);
+          const scannedCompany = JSON.parse(scannedCompanyStr);
+          
+          // Update the company in the array
+          const companyIndex = updatedCompanies.findIndex(c => c.id === company.id);
+          if (companyIndex !== -1) {
+            updatedCompanies[companyIndex] = scannedCompany;
+            // Update state immediately so UI reflects the change
+            setCompanies([...updatedCompanies]);
+          }
+          successCount++;
+        } catch (error) {
+          console.error(`Error scanning company ${company.name}:`, error);
+          failCount++;
+        } finally {
+          // Clear the currently scanning company ID
+          setCurrentlyScanningCompanyId(null);
+        }
+      }
+
+      if (failCount === 0) {
+        toast({
+          title: 'Scanning complete',
+          description: `Successfully scanned ${successCount} companies for ${user.name}.`,
+        });
+      } else {
+        toast({
+          title: 'Scanning completed with errors',
+          description: `Scanned ${successCount} companies successfully, ${failCount} failed.`,
+          variant: 'destructive',
+        });
+      }
     } catch (error) {
+      console.error('Error during scan all:', error);
       toast({
         title: 'Scanning failed',
         description: 'There was an error scanning the companies.',
@@ -86,7 +154,7 @@ const CustomerDashboard = () => {
       });
     } finally {
       setIsScanning(false);
-      window.location.reload();
+      setCurrentlyScanningCompanyId(null);
     }
   };
   const handleDeleteAllRecords = async (e: React.MouseEvent) => {
@@ -120,14 +188,38 @@ const CustomerDashboard = () => {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold">Customers</h1>
-        <div className="flex gap-4">
-          <Button
-            onClick={() => setDialogOpen(true)}
-            className="flex items-center gap-2 h-9 px-4"
-          >
-            <Plus className="h-4 w-4" />
-            Customer
-          </Button>
+        <div className="flex gap-4 items-center">
+         
+          <div className="flex items-center gap-3 px-3 py-2 border rounded-md">
+            <Label className="text-sm font-medium">Scan Types:</Label>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
+                <Checkbox
+                  id="scan-website"
+                  checked={scanTypes.website}
+                  onCheckedChange={(checked) =>
+                    setScanTypes((prev) => ({ ...prev, website: checked as boolean }))
+                  }
+                />
+                <Label htmlFor="scan-website" className="text-sm font-normal cursor-pointer">
+                  Website
+                </Label>
+              </div>
+              <div className="flex items-center gap-2">
+                <Checkbox
+                  id="scan-linkedin"
+                  checked={scanTypes.linkedin}
+                  onCheckedChange={(checked) =>
+                    setScanTypes((prev) => ({ ...prev, linkedin: checked as boolean }))
+                  }
+                />
+                <Label htmlFor="scan-linkedin" className="text-sm font-normal cursor-pointer">
+                  LinkedIn
+                </Label>
+              </div>
+            </div>
+          </div>
+          
           <Button
             variant="default"
             onClick={handleScanAll}
@@ -137,7 +229,13 @@ const CustomerDashboard = () => {
             <RefreshCw className={`h-4 w-4 ${isScanning ? 'animate-spin' : ''}`} />
             {isScanning ? 'Scanning...' : `Scan All`}
           </Button>
-
+          <Button
+            onClick={() => setDialogOpen(true)}
+            className="flex items-center gap-2 h-9 px-4"
+          >
+            <Plus className="h-4 w-4" />
+            Customer
+          </Button>
           <Button
             variant="default"
             onClick={handleDeleteAllRecords}
@@ -171,6 +269,7 @@ const CustomerDashboard = () => {
               company={company}
               setCompanies={setCompanies}
               onDelete={handleDeleteCompany}
+              isExternalScanning={currentlyScanningCompanyId === company.id}
             />
           ))}
         </div>

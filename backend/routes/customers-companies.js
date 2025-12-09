@@ -186,8 +186,9 @@ router.post('/:id', async (req, res) => {
 // Scan a company for a (customer)
 router.put('/:id/:companyId/scan', async (req, res) => {
   try {
+    const { scanTypes } = req.body;
     // scan the company
-    const response = await Company.scanCompany(req.params);
+    const response = await Company.scanCompany({ ...req.params, scanTypes: scanTypes || ['website', 'linkedin'] });
 
     res.status(201).json({
       success: true,
@@ -203,9 +204,10 @@ router.put('/:id/:companyId/scan', async (req, res) => {
 // Scan all companies for a (customer)
 router.post('/:id/scan', async (req, res) => {
   const { id } = req.params;
+  const { scanTypes } = req.body;
   try {
     // scan the company
-    const companies = await Company.scanCompany({ id: id, companyId: '' });
+    const companies = await Company.scanCompany({ id: id, companyId: '', scanTypes: scanTypes || ['website', 'linkedin'] });
 
     res.status(201).json({
       success: true,
@@ -225,7 +227,7 @@ router.post('/:id/:companyId/deleteRecords', async (req, res) => {
 
     console.log('Deleting records for company:', req.params.id, req.params.companyId);
     // scan the company
-    await Company.deleteRecord(req.params);
+    await Company.deleteRecord({ ...req.params, sourceType: req.body.sourceType });
 
     res.status(201).json({
       success: true,

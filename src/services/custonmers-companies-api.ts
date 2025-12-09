@@ -22,18 +22,25 @@ export const deleteCompany = async (customerId: string, companyId: string): Prom
     return response.data.companies;
 };
 
-export const scanCompany = async (customerId: string, companyId: string): Promise<string> => {
-    const response = await axios.put(`${BASE_URL}/customers-companies/${customerId}/${companyId}/scan`);
+export const scanCompany = async (customerId: string, companyId: string, scanTypes?: string[]): Promise<string> => {
+    console.log('scanTypes in API call:', scanTypes);
+    const response = await axios.put(`${BASE_URL}/customers-companies/${customerId}/${companyId}/scan`, {
+        scanTypes: scanTypes || ['website', 'linkedin']
+    });
     return response.data.company;
 };
 
-export const scanAllCompanies = async (customerId: string): Promise<Company[]> => {
-    const response = await axios.post(`${BASE_URL}/customers-companies/${customerId}/scan`);
+export const scanAllCompanies = async (customerId: string, scanTypes?: string[]): Promise<Company[]> => {
+    const response = await axios.post(`${BASE_URL}/customers-companies/${customerId}/scan`, {
+        scanTypes: scanTypes || ['website', 'linkedin']
+    });
     return response.data.companies;
 };
 
-export const deleteRecords = async (customerId: string, companyId: string): Promise<string> => {
-    const response = await axios.post(`${BASE_URL}/customers-companies/${customerId}/${companyId}/deleteRecords`);
+export const deleteRecords = async (customerId: string, companyId: string, sourceType?: "website" | "linkedin"): Promise<string> => {
+    const response = await axios.post(`${BASE_URL}/customers-companies/${customerId}/${companyId}/deleteRecords`, {
+        sourceType: sourceType
+    });
     return response.data.message;
 };
 

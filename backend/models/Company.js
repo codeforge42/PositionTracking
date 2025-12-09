@@ -41,7 +41,7 @@ class Company {
 
   static async scanCompany(scanData) {
 
-    const { id, companyId } = scanData;
+    const { id, companyId, scanTypes = ['website', 'linkedin'] } = scanData;
 
     // Check if user exists
     let companies;
@@ -69,31 +69,45 @@ class Company {
         // Await the Scraper function
         const websitelinks = [], linkedinlinks = [];
         company.jobs.map(job => {
-          if (job.link.includes('linkedin.com')) linkedinlinks.push(job.link);
-          else websitelinks.push(job.link);
+          if (job.link && job.link.includes('linkedin.com')) linkedinlinks.push(job.link);
+          else if (job.link) websitelinks.push(job.link);
         });
-        WebsitejobList = await Scraper(company.name, company.website, apiKey, 1, websitelinks);
-        if (WebsitejobList.found != 1) {
-          const jobRemovedForPartlist = links;
-          if (JSON.parse(WebsitejobList.matches).length > 0) {
-            let Jobs = [], PartList, Joblinks = [];
-            for (const url of JSON.parse(WebsitejobList.matches)) {
-              PartList = await Scraper(company.name, url, apiKey, 2, websitelinks);
+        
+        // Scan website only if website is in scanTypes
+        if (scanTypes.includes('website')) {
+          WebsitejobList = await Scraper(company.name, company.website, apiKey, 1, websitelinks);
+          if (WebsitejobList.found != 1) {
+            let jobRemovedForPartlist = websitelinks;
+            if (JSON.parse(WebsitejobList.matches).length > 0) {
+              let Jobs = [], PartList, Joblinks = [];
+              for (const url of JSON.parse(WebsitejobList.matches)) {
+                PartList = await Scraper(company.name, url, apiKey, 2, websitelinks);
     
-              JSON.parse(PartList.jobs).map(job => {
-                if (Joblinks.filter(j => j == job.link).length == 0) {
-                  Jobs.push(job);
-                  Joblinks.push(job.link);
-                }
-              });
-              jobRemovedForPartlist = jobRemovedForPartlist.filter(l => !JSON.parse(PartList.removed || '[]').some(r => r == l));
+                JSON.parse(PartList.jobs).map(job => {
+                  if (Joblinks.filter(j => j == job.link).length == 0) {
+                    Jobs.push(job);
+                    Joblinks.push(job.link);
+                  }
+                });
+                jobRemovedForPartlist = jobRemovedForPartlist.filter(l => !JSON.parse(PartList.removed || '[]').some(r => r == l));
+              }
+              WebsitejobList = { found: 1, jobs: JSON.stringify(Jobs), removed: JSON.stringify(jobRemovedForPartlist)};
             }
-            WebsitejobList = { found: 1, jobs: JSON.stringify(Jobs), removed: JSON.stringify(jobRemovedForPartlist)};
           }
+        } else {
+          // If website scan is not selected, set empty results
+          WebsitejobList = { jobs: '[]', removed: '[]' };
         }
-        LinkedinjobList = await Scraper(company.name, company.linkedin, apiKey, 2, linkedinlinks);
+        
+        // Scan LinkedIn only if linkedin is in scanTypes
+        if (scanTypes.includes('linkedin')) {
+          LinkedinjobList = await Scraper(company.name, company.linkedin, apiKey, 2, linkedinlinks);
+        } else {
+          // If LinkedIn scan is not selected, set empty results
+          LinkedinjobList = { jobs: '[]', removed: '[]' };
+        }
     
-        jobList = [...JSON.parse(WebsitejobList.jobs), ...JSON.parse(LinkedinjobList.jobs)];
+        jobList = [...JSON.parse(WebsitejobList.jobs || '[]'), ...JSON.parse(LinkedinjobList.jobs || '[]')];
         jobRemoved = [...JSON.parse(WebsitejobList.removed || '[]'), ...JSON.parse(LinkedinjobList.removed || '[]')];
         
         const now  = new Date();
@@ -144,7 +158,7 @@ class Company {
   
   static async deleteRecord(deleteData) {
 
-    const { id, companyId } = deleteData;
+    const { id, companyId, sourceType } = deleteData;
 
     // Check if user exists
     let companies;
@@ -161,8 +175,29 @@ class Company {
     }
     for (const company of companies) {
       if (company.id.includes(companyId)) {
-        company.jobs = [];
-        company.last_scan_date = null;
+        // If sourceType is provided, filter jobs by source type
+        if (sourceType) {
+          if (sourceType === 'website') {
+            // Delete website jobs, keep LinkedIn jobs
+            company.jobs = company.jobs.filter(job => 
+              job.link && job.link.toLowerCase().includes('linkedin.com')
+            );
+          } else if (sourceType === 'linkedin') {
+            // Delete LinkedIn jobs, keep website jobs
+            company.jobs = company.jobs.filter(job => 
+              !job.link || !job.link.toLowerCase().includes('linkedin.com')
+            );
+          }
+        } else {
+          // If no sourceType, delete all jobs (backward compatibility)
+          company.jobs = [];
+          company.last_scan_date = null;
+        }
+        
+        // Set last_scan_date to null only if all jobs are deleted
+        if (company.jobs.length === 0) {
+          company.last_scan_date = null;
+        }
       }
     }
     

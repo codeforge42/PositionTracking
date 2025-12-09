@@ -43,6 +43,97 @@ const isPageNumber = (text) => {
   return false;
 };
 
+async function convertToAttributeSelector(raw) {
+  if (!raw || typeof raw !== 'string') return raw;
+
+  const len = raw.length;
+  let inBracket = false;
+  let buf = '';
+  const tokens = [];
+
+  const pushBuf = () => {
+    if (buf !== '') {
+      tokens.push(buf);
+      buf = '';
+    }
+  };
+
+  for (let i = 0; i < len; i++) {
+    const ch = raw[i];
+
+    if (ch === '[') {
+      inBracket = true;
+      buf += ch;
+      continue;
+    }
+
+    if (ch === ']') {
+      inBracket = false;
+      buf += ch;
+      continue;
+    }
+
+    // If we hit a dot that is NOT inside brackets, it's a class boundary.
+    if (ch === '.' && !inBracket) {
+      // push existing buffer (could be combinator, tag, etc.)
+      pushBuf();
+      // start new class token with the dot
+      buf = '.';
+      continue;
+    }
+
+    // Handle combinators and separators when not inside brackets:
+    if (!inBracket && (ch === '>' || ch === '+' || ch === '~' || ch === ',')) {
+      // push current token and the combinator as separate tokens
+      pushBuf();
+      tokens.push(ch);
+      continue;
+    }
+
+    // Normalize whitespace: treat runs of whitespace as a single space (descendant combinator)
+    if (!inBracket && /\s/.test(ch)) {
+      // push current token, then push a single space if last token isn't a space
+      pushBuf();
+      if (tokens.length === 0 || tokens[tokens.length - 1] !== ' ') {
+        tokens.push(' ');
+      }
+      // skip adding this whitespace to buffer
+      // also skip accumulating multiple spaces
+      // continue to next char
+      // (do not add ch to buf)
+      // note: this preserves a single ' ' as descendant combinator
+      continue;
+    }
+
+    // default: append char to buffer
+    buf += ch;
+  }
+
+  // push leftover
+  pushBuf();
+
+  // Convert tokens: class tokens that include [...] become attribute selectors
+  const converted = tokens
+    .map(tok => {
+      // class token (starts with a dot)
+      if (tok.startsWith('.')) {
+        const cls = tok.slice(1);
+        if (cls.includes('[') && cls.includes(']')) {
+          // keep the full class string inside the attribute selector
+          return `[class*="${cls}"]`;
+        }
+        return `.${cls}`;
+      }
+      // otherwise return token as-is (combinator, space, tag, pseudo, etc.)
+      return tok;
+    })
+    .join('');
+
+  // cleanup: collapse multiple spaces to single, trim ends
+  return converted.replace(/\s+/g, ' ').trim();
+}
+
+
 const applyKeywords = [
   "apply",
   "more",
@@ -216,7 +307,7 @@ const Scraper = async (name, url, apiKey, step, links) => {
   const openai = new OpenAI({ apiKey: apiKey });
 
   const browser = await chromium.launch({
-    headless: true,
+    headless: false,
     args: [
       "--no-sandbox",
       "--disable-setuid-sandbox",
@@ -826,8 +917,11 @@ const Scraper = async (name, url, apiKey, step, links) => {
       else if (page.url().includes("atakama"))
         selector =
           ".wp-block-group.wow.fadeIn.is-layout-constrained.wp-container-core-group-is-layout-c9f28598.wp-block-group-is-layout-constrained > h3";
+      // else if (page.url().includes("appcharge")) selector = `[class*="text-[1.8rem]"][class*="leading-[1.1]"][class*="tracking-[-.056rem]"].font-semibold`;
     }
-    
+    console.log("Final selector:", selector);
+    selector = await convertToAttributeSelector(selector);
+    console.log("Converted selector:", selector);
     let jobAnchors = await findItem(page, selector);
 
     console.log("Initial jobAnchors", jobAnchors);
@@ -883,7 +977,7 @@ const Scraper = async (name, url, apiKey, step, links) => {
             if (
               !jobAnchors.some((j) => j.href === a.href && j.text === a.text)
             ) {
-              jobAnchors.push(a);
+              jobAnchors.push({...a, parent: page.url()});
             }
           }
 
@@ -925,14 +1019,14 @@ const Scraper = async (name, url, apiKey, step, links) => {
       }
 
       // Add the extracted anchors to the jobAnchors array
-      frameAnchors.forEach((a) => jobAnchors.push(a));
+      frameAnchors.forEach((a) => jobAnchors.push({...a, parent: frame.url()}));
     }
     console.log('links -> ', links);
     urlcontext = (Array.isArray(jobAnchors) ? jobAnchors : [])
-      .filter((a) => !(Array.isArray(links) ? links : []).some((l) => l && l.includes(a.href)))
+      .filter((a) => a.href && !(Array.isArray(links) ? links : []).some((l) => l && l.includes(a.href)))
       .map((a) => {
         return !a.href.includes(a.text)
-          ? `${a.text} — ${a.href}`
+          ? `${a.text} — ${a.href} — ${a.parent || url}`
           : `${a.text} - ${url}`;
       })
       .join("\n");
@@ -946,13 +1040,13 @@ const Scraper = async (name, url, apiKey, step, links) => {
     // here href might not be full url like "/jobs/senior-antenna-array-design-engineer-1", in this case it should be combined with base url
     let prefixNeeded = Array.isArray(jobAnchors) && jobAnchors.length > 0 && typeof jobAnchors[0].href === "string" && !jobAnchors[0].href.includes("http");
     prefixNeeded ? 
-    prompt = `Below is data related to job postings with the format (content — href). 
+    prompt = `Below is data related to job postings with the format (content — href — parent_href). 
   "${urlcontext}"
   if ${urlcontext} is empty or contains no columns related to job, return an empty array [].
   Extract all job postings in JSON format with the following fields:
   - title: Extracted from the content
   - company: Extracted from the href (if available)
-  - link: A valid, full URL of the company relating to href and ${new URL(url).hostname}.
+  - link: A valid, full URL of the company relating to href and parent_href.
 
   Output in the following JSON format:
   [
