@@ -307,7 +307,7 @@ const Scraper = async (name, url, apiKey, step, links) => {
   const openai = new OpenAI({ apiKey: apiKey });
 
   const browser = await chromium.launch({
-    headless: false,
+    headless: true,
     args: [
       "--no-sandbox",
       "--disable-setuid-sandbox",
