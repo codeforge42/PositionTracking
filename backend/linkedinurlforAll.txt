@@ -27,5 +27,11 @@
   "radcom": "https://www.linkedin.com/jobs/RADCOM-jobs-worldwide?f_C=9630",
   "spitzkop": "https://www.linkedin.com/jobs/Spitzkop-jobs-worldwide?f_C=42391741",
   "devrob": "https://www.linkedin.com/jobs/DevRob-jobs-worldwide?f_C=110048279",
-  "evinced": "https://www.linkedin.com/jobs/Evinced-jobs-worldwide?f_C=19104814"
+  "evinced": "https://www.linkedin.com/jobs/Evinced-jobs-worldwide?f_C=19104814",
+  "insait-io": "https://www.linkedin.com/jobs/Insait-jobs-worldwide?f_C=86644657",
+  "easyteam-global": "https://www.linkedin.com/jobs/Easyteam-jobs-worldwide?f_C=13053507",
+  "notchapp": "https://www.linkedin.com/jobs/Notch-jobs-worldwide?f_C=80668746",
+  "lema-ai": "https://www.linkedin.com/jobs/LemaAI-jobs-worldwide?f_C=102253190",
+  "sigaotsolutions": "https://www.linkedin.com/jobs/SIGA-MultiLevelOTResilience-jobs-worldwide?f_C=15237215",
+  "unith-ai": "https://www.linkedin.com/jobs/UNITH-jobs-worldwide?f_C=3878723"
 }

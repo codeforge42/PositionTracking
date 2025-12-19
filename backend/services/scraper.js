@@ -472,7 +472,7 @@ const Scraper = async (name, url, apiKey, step, links) => {
     page.close();
     return { found: 1, jobs: JSON.stringify(json), removed: JSON.stringify(removed) };
   } else {
-    if (step == 1) {
+    if (step == 1 && !url.includes("apply.workable.com")) {
       const domain = new URL(url).hostname;
       console.log("domain", domain);
       const urlforAll = fs.readFileSync("urlforAll.txt", "utf8");

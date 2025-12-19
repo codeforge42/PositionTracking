@@ -1,82 +1,80 @@
-1. Class: ".relative.m-0 > .relative.z-[100].text-[2.8rem].lg:text-[1.4rem].font-bold.lg:font-normal.leading-[1.1].lg:leading-[-0.85].tracking-[-0.5%].text-[var(--gray)].hover:text-black.flex.justify-between.items-center"
-   - "Why Appcharge"
+1. Class: "DIV > .SkipLink_skip_link__MHu1H"
+   - "Skip to main content"
 
-2. Class: ".inline-flex.items-center.justify-center.gap-2.whitespace-nowrap.rounded-full.text-base.font-medium.leading-[1.25].transition-all.disabled:pointer-events-none.disabled:opacity-50.[&_svg]:pointer-events-none.[&_svg:not([class*='size-'])]:size-4.shrink-0.[&_svg]:shrink-0.focus-visible:border-ring.focus-visible:ring-ring/50.focus-visible:ring-[3px].aria-invalid:ring-destructive/20.dark:aria-invalid:ring-destructive/40.aria-invalid:border-destructive.px-[2.3rem].pt-[1rem].pb-[1.2rem].group/link.text-[1.4rem].pl-0 > .relative.inline-block.after:content-[''].after:absolute.after:-bottom-[1px].after:left-0.after:h-[0.1rem].after:bg-current.after:w-0.after:transition-all.after:duration-300.after:ease-out.hover:after:w-full"
-   - "Login"
+2. Class: "A > SPAN"
+   - "Find More Bugs"
+   - "Get Organized"
 
-3. Class: ".flex.items-center > .inline-flex.items-center.justify-center.gap-2.whitespace-nowrap.rounded-full.text-base.font-medium.leading-[1.25].transition-all.disabled:pointer-events-none.disabled:opacity-50.[&_svg]:pointer-events-none.[&_svg:not([class*='size-'])]:size-4.shrink-0.[&_svg]:shrink-0.focus-visible:border-ring.focus-visible:ring-ring/50.focus-visible:ring-[3px].aria-invalid:ring-destructive/20.dark:aria-invalid:ring-destructive/40.aria-invalid:border-destructive.bg-[var(--black)].text-white.px-[2.3rem].pt-[0.6rem].pb-[0.8rem].group/link.text-[1.4rem].pl-[1.6rem].pr-[1.6rem]"
-   - "Get in touch"
+3. Class: "SPAN > SPAN"
+   - "MCP Tools"
+   - "Chatbot"
 
-4. Class: ".flex.flex-col.text-center.md:max-w-[83.2rem].md:mx-auto > .text-center.text-[3.6rem].md:text-[6rem]"
-   - "Join us"
+4. Class: "SPAN > .NavSection_link_description__DkXKi"
+   - "The MCP power you need in the place you want."
+   - "Your new favorite AI"
 
-5. Class: ".flex.flex-col.text-center.md:max-w-[83.2rem].md:mx-auto > .hidden.md:block.mb-12.md:mb-24.text-[1.6rem].md:text-[2.4rem].leading-[1.3].tracking-[-.018rem].md:mx-auto.mt-[1.8rem].md:mt-[3.6rem].max-w-[27rem].md:max-w-[48rem].mx-auto.font-medium"
-   - "We’re looking for talented creators ready to revolutionize gaming and elevate their careers with the industry’s brightest minds!"
+5. Class: "LI > .sr-only"
+   - "opens in a new tab"
+   - "opens in a new tab"
 
-6. Class: "DIV > .text-[1.8rem].leading-[1.1].tracking-[-.056rem].font-semibold"
-   - "Engineering Team Leader - Payments Platform"
-   - "Director of Product, Payments Platform"
+6. Class: ".Header_header_buttons__drQYe > .btn_outline"
+   - "Log In"
 
-7. Class: ".absolute > .pill-styling"
-   - "Tel Aviv"
-   - "Tel Aviv"
+7. Class: ".Header_header_buttons__drQYe > .sr-only"
+   - "opens in a new tab"
 
-8. Class: ".text-left.md:max-w-[12rem].md:mr-[6rem] > .text-[1.2rem].leading-[1.05].md:leading-[1.35].tracking-[-0.5%].font-semibold.md:font-semibold.mb-[1.4rem].md:mb-[1rem]"
-   - "Products"
+8. Class: "DIV > H1"
+   - "Careers"
 
-9. Class: "DIV > .text-[1.2rem].font-medium.leading-[1.05].md:leading-[1.25].tracking-[-0.5%].hover:text-black"
-   - "Web Store"
-   - "Game Portal"
+9. Class: "DIV > H2"
+   - "Join us."
+   - "Open Positions"
 
-10. Class: ".text-left.md:max-w-[12rem].md:mr-[8rem] > .text-[1.2rem].leading-[1.05].md:leading-[1.35].tracking-[-0.5%].font-semibold.md:font-semibold.mb-[1.4rem].md:mb-[1rem]"
-   - "Appcharge Platform"
+10. Class: ".Careers_secondary__zNEqS > P"
+   - "We believe in giving talented people room to run. In every part of the company — from engineering to sales and everything in between — you'll have a chance to contribute, own, and grow."
+   - "We are always looking for great people who share our mission to make technology work for absolutely everybody."
 
-11. Class: ".mt-[1rem].md:mt-[0.6rem] > .text-[1.2rem].leading-[1.05].md:leading-[1.35].tracking-[-0.5%].font-semibold.md:font-semibold.break-words"
-   - "Why Appcharge"
+11. Class: ".Careers_position_card__ZPrEP > H3"
+   - "Backend Engineer - GenAI Team"
+   - "FullStack Team Leader"
 
-12. Class: ".text-left.md:max-w-[12rem].md:mr-[5rem] > .text-[1.2rem].leading-[1.05].md:leading-[1.35].tracking-[-0.5%].font-semibold.md:font-semibold.mb-[1.4rem].md:mb-[1rem]"
-   - "Developers"
+12. Class: ".Careers_position_card__ZPrEP > .Careers_location__I9AUR"
+   - "Tel Aviv-Yafo, IL"
+   - "Tel Aviv-Yafo, IL"
 
-13. Class: ".text-left.md:max-w-[12rem] > .text-[1.2rem].leading-[1.05].md:leading-[1.35].tracking-[-0.5%].font-semibold.md:font-semibold.mb-[1.4rem].md:mb-[1rem]"
-   - "Company"
+13. Class: ".Careers_card_buttons__EfsF0 > .btn_outline"
+   - "Apply Here"
+   - "Apply Here"
 
-14. Class: ".w-full.text-left.md:max-w-[17rem] > .text-[1.2rem].leading-[1.05].md:leading-[1.35].tracking-[-0.5%].font-bold.md:font-semibold.mb-12.md:mb-[1.7rem]"
-   - "Connect with us"
+14. Class: "DIV > P"
+   - "Don't worry. If you don't see anything above that seems to fit, drop us a line anyway. We're growing rapidly and opportunities come up all the time."
 
-15. Class: ".flex.flex-col.gap-[0.2rem].md:gap-[1rem] > .text-[1.2rem].font-medium.leading-[1.05].md:leading-[1.25].tracking-[-0.5%].hover:text-black"
-   - "Facebook"
-   - "Linkedin"
+15. Class: "LI > .FooterNav_sectionTitle__YQL2i"
+   - "Why Evinced"
+   - "AI at Evinced"
 
-16. Class: ".h-full.flex.flex-col.gap-[2.4rem] > .inline-flex.items-center.justify-center.gap-2.whitespace-nowrap.rounded-full.text-base.font-medium.leading-[1.25].transition-all.disabled:pointer-events-none.disabled:opacity-50.[&_svg]:pointer-events-none.[&_svg:not([class*='size-'])]:size-4.shrink-0.[&_svg]:shrink-0.focus-visible:border-ring.focus-visible:ring-ring/50.focus-visible:ring-[3px].aria-invalid:ring-destructive/20.dark:aria-invalid:ring-destructive/40.aria-invalid:border-destructive.bg-[var(--black)].text-white.px-[2.3rem].pt-[0.6rem].pb-[0.8rem].group/link.mt-auto.text-[1.2rem].px-[1.6rem]"
-   - "Contact us"
+16. Class: "LI > A"
+   - "Find More Bugs"
+   - "Get Organized"
 
-17. Class: ".flex.flex-col.items-start.gap-[1.2rem] > .text-[1.2rem].font-medium.leading-[1.05].md:leading-[1.25].tracking-[-0.5%].hover:text-black"
-   - "Facebook"
-   - "Linkedin"
+17. Class: ".FooterNav_namelessSection__2LtHH > .FooterNav_copyRight__gLjTG"
+   - "©2025Evinced Inc."
 
-18. Class: ".w-full.flex.justify-start > .inline-flex.items-center.justify-center.gap-2.whitespace-nowrap.rounded-full.text-base.font-medium.leading-[1.25].transition-all.disabled:pointer-events-none.disabled:opacity-50.[&_svg]:pointer-events-none.[&_svg:not([class*='size-'])]:size-4.shrink-0.[&_svg]:shrink-0.focus-visible:border-ring.focus-visible:ring-ring/50.focus-visible:ring-[3px].aria-invalid:ring-destructive/20.dark:aria-invalid:ring-destructive/40.aria-invalid:border-destructive.bg-[var(--black)].text-white.px-[2.3rem].pt-[0.6rem].pb-[0.8rem].group/link.mt-auto.text-[1.2rem].px-[1.6rem]"
-   - "Contact us"
+18. Class: ".FooterNav_compactFooterBasement__MjJky > .FooterNav_copyRight__gLjTG"
+   - "©2025Evinced Inc."
 
-19. Class: ".flex.justify-start.gap-12.mb-[1.4rem].md:mb-0.md:ml-[3.2rem] > .text-[#7D7D7D].text-[1.4rem].font-medium.leading-[1.05].md:leading-[1.25].tracking-[-0.5%].hover:text-black"
+19. Class: ".cm__texts > .cm__title"
+   - "Your privacy"
+
+20. Class: ".cm__texts > .cm__desc"
+   - "We use cookies to make our website work, for analytics, and to serve ads. You can accept or customize these uses. If you reject all of them, the website may malfunction."
+
+21. Class: ".cm__btn > SPAN"
+   - "Accept All"
+   - "Reject Unnecessary"
+
+22. Class: ".cm__btn.cm__btn--secondary > SPAN"
+   - "Customize"
+
+23. Class: ".cm__link-group > A"
    - "Privacy Policy"
-   - "Terms of Use"
-
-20. Class: ".md:flex.md:flex-row-reverse > .text-[1.4rem].text-[#7D7D7D].font-medium.leading-[1.05].md:leading-[1.25].tracking-[-0.5%]"
-   - "© Appcharge2025.All rights reserved"
-
-21. Class: ".group.flex.flex-row.items-center.gap-3.cursor-pointer.bg-transparent.p-0.border-0 > .text-[1.4rem].text-[#7D7D7D].group-hover:text-black.font-medium.leading-[1.05].md:leading-[1.25].tracking-[-0.5%].transition-colors.duration-200"
-   - "English"
-
-22. Class: ".rc-anchor.rc-anchor-invisible.rc-anchor-light.rc-anchor-invisible-hover > .rc-anchor-aria-status"
-   - "Recaptcha requires verification."
-
-23. Class: ".rc-anchor-pt > A"
-   - "Privacy"
-   - "Terms"
-
-24. Class: ".rc-anchor-pt > SPAN"
-   - "-"
-   - "-"
-
-25. Class: ".rc-anchor-invisible-text > SPAN"
-   - "protected by"

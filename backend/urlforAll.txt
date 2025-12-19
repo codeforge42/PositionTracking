@@ -40,5 +40,8 @@
   "radcom.com": "https://radcom.com/careers/",
   "fixify.com": "https://www.fixify.com/careers",
   "www.fixify.com": "https://www.fixify.com/careers",
-  "www.pomvom.com": "https://www.pomvom.com/careers"
+  "www.pomvom.com": "https://www.pomvom.com/careers",
+  "insait.io": "https://insait.io/careers/",
+  "www.notch.cx": "https://www.notch.cx/careers",
+  "sigasec.com": "https://sigasec.com/were-hiring/"
 }
