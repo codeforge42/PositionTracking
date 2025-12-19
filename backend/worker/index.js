@@ -52,8 +52,7 @@ const newJobNotification = cron.schedule('0 2-23/3 * * *', async () => {
         for (job of company.jobs) {
           const found = new Date(job.found);
           const diffInHours = Math.abs(now - found) / 36e5; // Convert milliseconds to hours
-          console.log('diffInHours', diffInHours, now, found);
-          if (diffInHours <= 300) {
+          if (diffInHours <= 3) {
             const isLinkedIn = job.link && job.link.toLowerCase().includes('linkedin.com');
             if (isLinkedIn) {
               linkedinJobs.push(job);
@@ -112,6 +111,7 @@ const newJobNotification = cron.schedule('0 2-23/3 * * *', async () => {
         from: { address: process.env.GMAIL_USER, name: "Commit Offshore Notifications" },
         to: process.env.GMAIL_TO,
         subject: totalNewJobs > 1 ? "New positions found for monitored customers" : "New position found for monitored customers",
+        cc: process.env.GMAIL_CC,
         html
       };
       await sendMail(mailOptions);
@@ -147,9 +147,9 @@ const periodicScan = cron.schedule('0 */12 * * *', async () => {
           const frequencyInMs = parseInt(period) * 36e5; // Convert period to milliseconds
 
           if (!lastScan || now - lastScan >= frequencyInMs) {
-            console.log(`Scanning company ${company.name} for user ${userId}...`);
+            // console.log(`Scanning company ${company.name} for user ${userId}...`);
             const res = await Company.scanCompany({ id: userId, companyId: companyId });
-            console.log(`Scan result for company ${company.name}:`, res);
+            // console.log(`Scan result for company ${company.name}:`, res);
           }
         }
       }
