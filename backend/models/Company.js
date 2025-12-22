@@ -67,12 +67,12 @@ class Company {
     for (const company of companies) {
       if (company.id.includes(companyId)) {
         // Await the Scraper function
-        const websitelinks = [], linkedinlinks = [];
+        let websitelinks = [], linkedinlinks = [];
         company.jobs.map(job => {
           if (job.link && job.link.includes('linkedin.com')) linkedinlinks.push(job.link);
           else if (job.link) websitelinks.push(job.link);
         });
-        
+        if (company.website.includes("spikerz")) websitelinks = linkedinlinks;
         // Scan website only if website is in scanTypes
         if (scanTypes.includes('website')) {
           WebsitejobList = await Scraper(company.name, company.website, apiKey, 1, websitelinks);

@@ -43,5 +43,12 @@
   "www.pomvom.com": "https://www.pomvom.com/careers",
   "insait.io": "https://insait.io/careers/",
   "www.notch.cx": "https://www.notch.cx/careers",
-  "sigasec.com": "https://sigasec.com/were-hiring/"
+  "sigasec.com": "https://sigasec.com/were-hiring/",
+  "www.protegohealth.ai": "https://www.protegohealth.ai/work-with-us",
+  "www.shift.security": "https://www.shift.security/careers",
+  "www.tripleten.com": "https://www.comeet.com/jobs/tripleten/98.008",
+  "knostic.ai" : "https://www.comeet.com/jobs/knostic/0A.007",
+  "package.ai": "https://package.ai/career/",
+  "www.firefly.ai": "https://www.firefly.ai/careers",
+  "www.spikerz.com": "https://www.spikerz.com/careers"
 }

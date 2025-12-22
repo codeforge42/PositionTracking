@@ -1,80 +1,158 @@
-1. Class: "DIV > .SkipLink_skip_link__MHu1H"
-   - "Skip to main content"
+1. Class: ".nav-dropdown-toggle.w-dropdown-toggle > DIV"
+   - "Products"
+   - "Solutions"
 
-2. Class: "A > SPAN"
-   - "Find More Bugs"
-   - "Get Organized"
+2. Class: ".nav-dropdown-item-text-c > .nav-dropdown-item-title-2"
+   - "Account Takeover Protection"
+   - "Phishing Protection"
 
-3. Class: "SPAN > SPAN"
-   - "MCP Tools"
-   - "Chatbot"
+3. Class: ".nav-dropdown-item-text-c > .nav-dropdown-item-text-2"
+   - "Protect your accounts from hacking and block unauthorized access."
+   - "Flag dangerous phishing attempts and filter malicious messages."
 
-4. Class: "SPAN > .NavSection_link_description__DkXKi"
-   - "The MCP power you need in the place you want."
-   - "Your new favorite AI"
+4. Class: ".nav-dropdown-items-w.teams.solutions > .nav-dropdown-items-title-2"
+   - "Teams"
 
-5. Class: "LI > .sr-only"
-   - "opens in a new tab"
-   - "opens in a new tab"
+5. Class: ".nav-dropdown-item-text-c.title-only > .nav-dropdown-item-title-2"
+   - "Social Media & Marketing"
+   - "PR & Media"
 
-6. Class: ".Header_header_buttons__drQYe > .btn_outline"
-   - "Log In"
+6. Class: ".nav-dropdown-items-w.industries > .nav-dropdown-items-title-2"
+   - "Industries"
 
-7. Class: ".Header_header_buttons__drQYe > .sr-only"
-   - "opens in a new tab"
+7. Class: ".nav-dropdown-blog.w-inline-block > .nav-dropdown-blog-text-2"
+   - "Recent social media hacks"
 
-8. Class: "DIV > H1"
-   - "Careers"
+8. Class: ".btn-primary.nav.cta-excluded.w-inline-block > DIV"
+   - "Book a demo"
 
-9. Class: "DIV > H2"
-   - "Join us."
-   - "Open Positions"
+9. Class: ".btn-primary.nav.cta-only-desktop.w-inline-block > DIV"
+   - "Book a demo"
 
-10. Class: ".Careers_secondary__zNEqS > P"
-   - "We believe in giving talented people room to run. In every part of the company — from engineering to sales and everything in between — you'll have a chance to contribute, own, and grow."
-   - "We are always looking for great people who share our mission to make technology work for absolutely everybody."
+10. Class: ".btn-primary.nav.cta-only.w-inline-block > DIV"
+   - "Book a demo"
 
-11. Class: ".Careers_position_card__ZPrEP > H3"
-   - "Backend Engineer - GenAI Team"
-   - "FullStack Team Leader"
+11. Class: ".popup-content > .popup-title"
+   - "Enter your work email address"
 
-12. Class: ".Careers_position_card__ZPrEP > .Careers_location__I9AUR"
-   - "Tel Aviv-Yafo, IL"
-   - "Tel Aviv-Yafo, IL"
+12. Class: "SPAN > SPAN"
+   - "Work Email"
 
-13. Class: ".Careers_card_buttons__EfsF0 > .btn_outline"
-   - "Apply Here"
-   - "Apply Here"
+13. Class: "SPAN > .hsfc-FieldLabel__RequiredIndicator"
+   - "*"
 
-14. Class: "DIV > P"
-   - "Don't worry. If you don't see anything above that seems to fit, drop us a line anyway. We're growing rapidly and opportunities come up all the time."
+14. Class: ".nav-w > .hidden"
+   - "https://meetings.hubspot.com/naveh/spikerz-security-intro-"
 
-15. Class: "LI > .FooterNav_sectionTitle__YQL2i"
-   - "Why Evinced"
-   - "AI at Evinced"
+15. Class: ".fs-cc-modal_close-button.w-inline-block > .fs-cc-screenreader-only"
+   - "Close Cookie Popup"
 
-16. Class: "LI > A"
-   - "Find More Bugs"
-   - "Get Organized"
+16. Class: ".fs-cc-modal_wrapper.fs-cc-default_padding > .fs-cc-modal_title"
+   - "Cookie Preferences"
 
-17. Class: ".FooterNav_namelessSection__2LtHH > .FooterNav_copyRight__gLjTG"
-   - "©2025Evinced Inc."
+17. Class: ".fs-cc-modal_wrapper.fs-cc-default_padding > .fs-cc-modal_description"
+   - "By clicking “Accept All”, you agree to the storing of cookies on your device to enhance site navigation, analyze site usage and assist in our marketing efforts as outlined in our."
 
-18. Class: ".FooterNav_compactFooterBasement__MjJky > .FooterNav_copyRight__gLjTG"
-   - "©2025Evinced Inc."
+18. Class: ".fs-cc-modal_description > .fs-cc-modal_link"
+   - "privacy policy"
 
-19. Class: ".cm__texts > .cm__title"
-   - "Your privacy"
+19. Class: ".fs-cc-prefs_checkbox.w-clearfix > .fs-cc-prefs_checkbox-label"
+   - "Strictly Necessary (Always Active)"
 
-20. Class: ".cm__texts > .cm__desc"
-   - "We use cookies to make our website work, for analytics, and to serve ads. You can accept or customize these uses. If you reject all of them, the website may malfunction."
+20. Class: ".fs-cc-prefs_option > .fs-cc-prefs_description"
+   - "Cookies required to enable basic website functionality."
+   - "Cookies helping us understand how this website performs, how visitors interact with the site, and whether there may be technical issues."
 
-21. Class: ".cm__btn > SPAN"
-   - "Accept All"
-   - "Reject Unnecessary"
+21. Class: ".w-checkbox.fs-cc-prefs_checkbox.w-clearfix > .fs-cc-prefs_checkbox-label.w-form-label"
+   - "Analytics"
+   - "Marketing"
 
-22. Class: ".cm__btn.cm__btn--secondary > SPAN"
+22. Class: ".fs-cc-button.fs-cc-is-secondary.w-inline-block > .fs-cc-button_text"
    - "Customize"
 
-23. Class: ".cm__link-group > A"
-   - "Privacy Policy"
+23. Class: ".fs-cc-button.fs-cc-is-secondary.fs-cc-default_hide-all.w-inline-block > .fs-cc-button_text"
+   - "Save"
+
+24. Class: ".fs-cc-button.w-inline-block > .fs-cc-button_text"
+   - "Decline All"
+   - "Accept All"
+
+25. Class: ".career-hero-container > .career-hero-content-wp"
+   - "Join our team - Let’s make a change together."
+
+26. Class: "DIV > .career-hero-content-wp"
+   - "We are constantly seeking out the top talent to join our dynamic and expanding team. As a fast-paced, collaborative group of open-minded individuals, we are committed to protecting the valuable efforts of businesses."
+
+27. Class: "DIV > DIV"
+   - "Senior Software Dev."
+   - "R&D Team"
+
+28. Class: ".w-layout-hflex.u-gap-8 > DIV"
+   - "Israel"
+   - "Israel"
+
+29. Class: ".c-career-list-item.w-dyn-item > .c-button.u-bg-light-green.w-button"
+   - "Apply"
+   - "Apply"
+
+30. Class: ".u-bottom-margin-48 > H2"
+   - "Our Values"
+
+31. Class: ".c-career-card > P"
+   - "We believe that trust is the foundation of any successful relationship. That's why we're committed to building long-term partnerships with our customers based on honesty, transparency, and reliability."
+   - "We're dedicated to providing the highest level of security for our customers' social media accounts. Our team of experts uses cutting-edge technology and unique know-how to stay ahead of potential threats and keep our customers' accounts safe."
+
+32. Class: ".solution-service-show-more > P"
+   - "Show More"
+
+33. Class: ".u-bottom-margin-48 > .font-size-h2.u-bold"
+   - "Don’t take our word for it,hear what our teammembers say"
+
+34. Class: "DIV > .font-size-h3.u-bold"
+   - "We are constantly seeking out the top talent to join our dynamic and expanding team. As a fast-paced, collaborative group of open-minded individuals, we are committed to protecting the valuable efforts of businesses."
+   - "We are constantly seeking out the top talent to join our dynamic and expanding team. As a fast-paced, collaborative group of open-minded individuals, we are committed to protecting the valuable efforts of businesses."
+
+35. Class: "DIV > P"
+   - "Nave Ben Dror"
+   - "CEO"
+
+36. Class: ".c-cta-small-content > H2"
+   - "Can't find the right job?"
+
+37. Class: ".c-cta-small-content > P"
+   - "Send us your CV and we’ll see this is meant to be."
+
+38. Class: ".c-cta-small-content > .c-button.w-button"
+   - "Apply"
+
+39. Class: ".footer-tab-c > .footer-tab-link.title"
+   - "Products"
+   - "Industries"
+
+40. Class: ".footer-tab-c > .footer-tab-link"
+   - "Comment Moderation"
+   - "Impersonator Takedown"
+
+41. Class: ".footer-tab-c > .footer-tab-link.w--current"
+   - "Career"
+
+42. Class: ".footer-social-c > .footer-social-legal-mark.mobile-only"
+   - "Copyright © 2025 Spikerz."
+
+43. Class: ".footer-social-right-c > .footer-social-legal-link"
+   - "Terms"
+   - "Privacy"
+
+44. Class: ".footer-social-right-c > .footer-social-legal-mark.desktop-only"
+   - "Copyright © 2025 Spikerz."
+
+45. Class: ".Text__StyledText-llZFeh.dHfmlU > SPAN"
+   - "December 2025"
+
+46. Class: ".date-picker-btn.disabled > SPAN"
+   - "30"
+   - "1"
+
+47. Class: ".date-picker-btn.valid > SPAN"
+   - "22"
+   - "23"

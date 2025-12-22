@@ -472,7 +472,7 @@ const Scraper = async (name, url, apiKey, step, links) => {
     page.close();
     return { found: 1, jobs: JSON.stringify(json), removed: JSON.stringify(removed) };
   } else {
-    if (step == 1 && !url.includes("apply.workable.com")) {
+    if (step == 1 && !url.includes("apply.workable.com") && !url.includes("comeet.com")) {
       const domain = new URL(url).hostname;
       console.log("domain", domain);
       const urlforAll = fs.readFileSync("urlforAll.txt", "utf8");
@@ -544,7 +544,7 @@ const Scraper = async (name, url, apiKey, step, links) => {
     for (const frame of frames) {
       let frameAnchors = {};
       try {
-        if (step == 1 && !url.includes("kelloggcareers") && !url.includes("fixify")) {
+        if (step == 1 && !url.includes("kelloggcareers") && !url.includes("fixify") && !url.includes("spikerz")) {
           const navigatingElements = await frame.$$("a");
           for (const handle of navigatingElements) {
             const text = await handle.evaluate((el) =>
@@ -993,6 +993,7 @@ const Scraper = async (name, url, apiKey, step, links) => {
     }
     for (const frame of frames) {
       if (frame === page.mainFrame()) continue;
+      if (url.includes("spikerz")) break;
 
       let frameAnchors = [];
 
@@ -1023,7 +1024,7 @@ const Scraper = async (name, url, apiKey, step, links) => {
     }
     console.log('links -> ', links);
     urlcontext = (Array.isArray(jobAnchors) ? jobAnchors : [])
-      .filter((a) => a.href && !(Array.isArray(links) ? links : []).some((l) => l && l.includes(a.href)))
+      .filter((a) => a.href && !(Array.isArray(links) ? links : []).some((l) => l && l.includes(a.href)) && a.text.length < 300)
       .map((a) => {
         return !a.href.includes(a.text)
           ? `${a.text} — ${a.href} — ${a.parent || url}`

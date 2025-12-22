@@ -33,5 +33,12 @@
   "notchapp": "https://www.linkedin.com/jobs/Notch-jobs-worldwide?f_C=80668746",
   "lema-ai": "https://www.linkedin.com/jobs/LemaAI-jobs-worldwide?f_C=102253190",
   "sigaotsolutions": "https://www.linkedin.com/jobs/SIGA-MultiLevelOTResilience-jobs-worldwide?f_C=15237215",
-  "unith-ai": "https://www.linkedin.com/jobs/UNITH-jobs-worldwide?f_C=3878723"
+  "unith-ai": "https://www.linkedin.com/jobs/UNITH-jobs-worldwide?f_C=3878723",
+  "protegohealth": "https://www.linkedin.com/jobs/ProtegoHealth-jobs-worldwide?f_C=96229226",
+  "fireflyai": "https://www.linkedin.com/jobs/Firefly-jobs-worldwide?f_C=76526616",
+  "shift-security": "https://www.linkedin.com/jobs/ShiftSecurity-jobs-worldwide?f_C=106605961",
+  "withrotate": "https://www.linkedin.com/jobs/Rotate-jobs-worldwide?f_C=87097580",
+  "knostic": "https://www.linkedin.com/jobs/Knostic-jobs-worldwide?f_C=100714136",
+  "gaudai": "https://www.linkedin.com/jobs/GaudaiDataSecurity-jobs-worldwide?f_C=102399441",
+  "spikerz-security": "https://www.linkedin.com/jobs/SpikerzSecurity-jobs-worldwide?f_C=77005073"
 }
