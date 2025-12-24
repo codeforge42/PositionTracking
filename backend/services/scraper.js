@@ -6,7 +6,7 @@ require("dotenv").config();
 
 
 const brightKey =
-  "00af2aac5429b88e7c595f0090606d12abae32445f73502e3503ea37b724c9ad"; // replace with your API key
+  "7fa136b5-9f99-4675-9da3-7d458de05eff"; // replace with your API key
 const MAX_RETRIES = 200 // 200 x 5 seconds = 1000 seconds
 const DELAY_MS = 10000 // 5 seconds
 
