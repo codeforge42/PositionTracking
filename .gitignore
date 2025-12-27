@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 *.env
 /backend/.env
+groups.txt
+job_links_for_llm.txt
