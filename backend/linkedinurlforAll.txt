@@ -40,5 +40,7 @@
   "withrotate": "https://www.linkedin.com/jobs/Rotate-jobs-worldwide?f_C=87097580",
   "knostic": "https://www.linkedin.com/jobs/Knostic-jobs-worldwide?f_C=100714136",
   "gaudai": "https://www.linkedin.com/jobs/GaudaiDataSecurity-jobs-worldwide?f_C=102399441",
-  "spikerz-security": "https://www.linkedin.com/jobs/SpikerzSecurity-jobs-worldwide?f_C=77005073"
+  "spikerz-security": "https://www.linkedin.com/jobs/SpikerzSecurity-jobs-worldwide?f_C=77005073",
+  "package.ai": "https://www.linkedin.com/jobs/PACKAGE.AI-jobs-worldwide?f_C=17970893",
+  "ritual-relationships": "https://www.linkedin.com/jobs/OurRitual-jobs-worldwide?f_C=72688766"
 }
