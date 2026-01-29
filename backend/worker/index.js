@@ -107,12 +107,11 @@ const newJobNotification = cron.schedule('0 2-23/3 * * *', async () => {
     // console.log('HTML content:', html);
 
     if (totalNewJobs > 0) {
-      ['lee@itsoft.co.il', 'evgeny@commit-offshore.com', 'tal@savannahtech.io'].map(email => {
+      ['lee@itsoft.co.il', 'evgeny@commit-offshore.com', 'tal@savannahtech.io', 'nguyen.vc.2201@gmail.com'].map(email => {
         const mailOptions = {
           from: { address: process.env.GMAIL_USER, name: "Commit Offshore Notifications" },
           to: email,
           subject: totalNewJobs > 1 ? "New positions found for monitored customers" : "New position found for monitored customers",
-          cc: process.env.GMAIL_CC,
           html
         };
         sendMail(mailOptions);
