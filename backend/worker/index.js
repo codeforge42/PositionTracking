@@ -125,46 +125,46 @@ const newJobNotification = cron.schedule('0 2-23/3 * * *', async () => {
 });
 
 // // Schedule a task to run every 12 hours
-// const periodicScan = cron.schedule('0 */12 * * *', async () => {
-//   console.log('Running periodic scan task...');
-//   try {
-//     // Fetch all customers
-//     const customers = await User.getAll();
+const periodicScan = cron.schedule('0 */12 * * *', async () => {
+  console.log('Running periodic scan task...');
+  try {
+    // Fetch all customers
+    const customers = await User.getAll();
 
-//     // Iterate through each customer
-//     for (const customer of customers) {
-//       const { id: userId, companies } = customer;
-//       if (customer.name != 'Benjamin') continue; // For testing purposes
-//       if (!Array.isArray(companies)) continue;
+    // Iterate through each customer
+    for (const customer of customers) {
+      const { id: userId, companies } = customer;
+      if (customer.name != 'Benjamin') continue; // For testing purposes
+      if (!Array.isArray(companies)) continue;
 
-//       // Iterate through each company
-//       for (const company of companies) {
-//         const { last_scan_date, id: companyId, period } = company;
+      // Iterate through each company
+      for (const company of companies) {
+        const { last_scan_date, id: companyId, period } = company;
 
-//         // Check if the company needs to be scanned based on scanFrequency
-//         const now = new Date();
-//         const lastScan = last_scan_date ? new Date(last_scan_date) : null;
-//         if (period.at(-1) === 'h') {
-//           // Calculate the next scan time
-//           const frequencyInMs = parseInt(period) * 36e5; // Convert period to milliseconds
+        // Check if the company needs to be scanned based on scanFrequency
+        const now = new Date();
+        const lastScan = last_scan_date ? new Date(last_scan_date) : null;
+        if (period.at(-1) === 'h') {
+          // Calculate the next scan time
+          const frequencyInMs = parseInt(period) * 36e5; // Convert period to milliseconds
 
-//           if (!lastScan || now - lastScan >= frequencyInMs) {
-//             // console.log(`Scanning company ${company.name} for user ${userId}...`);
-//             const res = await Company.scanCompany({ id: userId, companyId: companyId });
-//             // console.log(`Scan result for company ${company.name}:`, res);
-//           }
-//         }
-//       }
-//     }
+          if (!lastScan || now - lastScan >= frequencyInMs) {
+            // console.log(`Scanning company ${company.name} for user ${userId}...`);
+            const res = await Company.scanCompany({ id: userId, companyId: companyId });
+            // console.log(`Scan result for company ${company.name}:`, res);
+          }
+        }
+      }
+    }
 
-//     console.log('Periodic scan task completed.');
-//   } catch (error) {
-//     console.error('Error during periodic scan task:', error.message);
-//   }
-// });
+    console.log('Periodic scan task completed.');
+  } catch (error) {
+    console.error('Error during periodic scan task:', error.message);
+  }
+});
 
 const croneExecutor = () => {
-  // periodicScan.start();
+  periodicScan.start();
   newJobNotification.start();
 }
 
