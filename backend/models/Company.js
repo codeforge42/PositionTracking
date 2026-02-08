@@ -113,6 +113,7 @@ class Company {
         const now  = new Date();
         classified_jobList = [];
         for (const job of jobList) {
+          if (!job.link) continue;
           const jobPosting = {
             title: job.title,
             company: company.name,
