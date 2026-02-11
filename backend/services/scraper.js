@@ -4,14 +4,12 @@ const OpenAI = require("openai");
 const fs = require("fs");
 require("dotenv").config();
 
-
-const brightKey =
-  "7fa136b5-9f99-4675-9da3-7d458de05eff"; // replace with your API key
-const MAX_RETRIES = 200 // 200 x 5 seconds = 1000 seconds
-const DELAY_MS = 10000 // 5 seconds
+const brightKey = "7fa136b5-9f99-4675-9da3-7d458de05eff"; // replace with your API key
+const MAX_RETRIES = 200; // 200 x 5 seconds = 1000 seconds
+const DELAY_MS = 10000; // 5 seconds
 
 function delay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms))
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 // External viewJobs function
@@ -44,46 +42,46 @@ const isPageNumber = (text) => {
 };
 
 async function convertToAttributeSelector(raw) {
-  if (!raw || typeof raw !== 'string') return raw;
+  if (!raw || typeof raw !== "string") return raw;
 
   const len = raw.length;
   let inBracket = false;
-  let buf = '';
+  let buf = "";
   const tokens = [];
 
   const pushBuf = () => {
-    if (buf !== '') {
+    if (buf !== "") {
       tokens.push(buf);
-      buf = '';
+      buf = "";
     }
   };
 
   for (let i = 0; i < len; i++) {
     const ch = raw[i];
 
-    if (ch === '[') {
+    if (ch === "[") {
       inBracket = true;
       buf += ch;
       continue;
     }
 
-    if (ch === ']') {
+    if (ch === "]") {
       inBracket = false;
       buf += ch;
       continue;
     }
 
     // If we hit a dot that is NOT inside brackets, it's a class boundary.
-    if (ch === '.' && !inBracket) {
+    if (ch === "." && !inBracket) {
       // push existing buffer (could be combinator, tag, etc.)
       pushBuf();
       // start new class token with the dot
-      buf = '.';
+      buf = ".";
       continue;
     }
 
     // Handle combinators and separators when not inside brackets:
-    if (!inBracket && (ch === '>' || ch === '+' || ch === '~' || ch === ',')) {
+    if (!inBracket && (ch === ">" || ch === "+" || ch === "~" || ch === ",")) {
       // push current token and the combinator as separate tokens
       pushBuf();
       tokens.push(ch);
@@ -94,8 +92,8 @@ async function convertToAttributeSelector(raw) {
     if (!inBracket && /\s/.test(ch)) {
       // push current token, then push a single space if last token isn't a space
       pushBuf();
-      if (tokens.length === 0 || tokens[tokens.length - 1] !== ' ') {
-        tokens.push(' ');
+      if (tokens.length === 0 || tokens[tokens.length - 1] !== " ") {
+        tokens.push(" ");
       }
       // skip adding this whitespace to buffer
       // also skip accumulating multiple spaces
@@ -114,11 +112,11 @@ async function convertToAttributeSelector(raw) {
 
   // Convert tokens: class tokens that include [...] become attribute selectors
   const converted = tokens
-    .map(tok => {
+    .map((tok) => {
       // class token (starts with a dot)
-      if (tok.startsWith('.')) {
+      if (tok.startsWith(".")) {
         const cls = tok.slice(1);
-        if (cls.includes('[') && cls.includes(']')) {
+        if (cls.includes("[") && cls.includes("]")) {
           // keep the full class string inside the attribute selector
           return `[class*="${cls}"]`;
         }
@@ -127,12 +125,11 @@ async function convertToAttributeSelector(raw) {
       // otherwise return token as-is (combinator, space, tag, pseudo, etc.)
       return tok;
     })
-    .join('');
+    .join("");
 
   // cleanup: collapse multiple spaces to single, trim ends
-  return converted.replace(/\s+/g, ' ').trim();
+  return converted.replace(/\s+/g, " ").trim();
 }
-
 
 const applyKeywords = [
   "apply",
@@ -159,7 +156,7 @@ async function findNavigationFromParents(startHandle, text, page) {
       try {
         const tag = await el.evaluate((el) => el.tagName.toLowerCase());
         const textContent = await el.evaluate((el) =>
-          el.textContent.toLowerCase()
+          el.textContent.toLowerCase(),
         );
 
         if (tag === "a" && keywords.some((kw) => textContent.includes(kw))) {
@@ -236,7 +233,7 @@ async function findItem(page, selector) {
     } catch (err) {
       console.warn(
         "⚠️ Failed to query candidates after navigation:",
-        err.message
+        err.message,
       );
       break; // Prevent infinite loop on persistent failure
     }
@@ -331,100 +328,102 @@ const Scraper = async (name, url, apiKey, step, links) => {
   let urlcontext = "",
     prompt = "";
   if (url.includes("linkedin")) {
-      const linkedinurlforAll = fs.readFileSync("linkedinurlforAll.txt", "utf8");
-      let companyName = '';
-      const parsedUrl = new URL(url);
-      const segments = parsedUrl.pathname.split("/").filter(Boolean); // remove empty
-      // Look for the segment following 'company'
-      const idx = segments.indexOf("company");
-      if (idx !== -1 && segments.length > idx + 1) {
-        companyName = segments[idx + 1];
-      }
-      // Normalize LinkedIn company URL to the company profile page
-      // e.g. convert https://www.linkedin.com/company/moonee/jobs/ -> https://www.linkedin.com/company/moonee/
-      let companyProfileUrl = null;
-      if (companyName) {
-        companyProfileUrl = `${parsedUrl.protocol}//${parsedUrl.host}/company/${companyName}/`;
-        // use the profile URL for subsequent API calls that expect the company page
-        url = companyProfileUrl;
-      }
-      const jobPageUrl = JSON.parse(linkedinurlforAll);
-      let snapshot_id;
-      if (!jobPageUrl[companyName]) {
-        await axios
-          .post(
-            `https://api.brightdata.com/datasets/v3/trigger?dataset_id=gd_l1vikfnt1wgvvqz95w&include_errors=true`,
-            {"url": url},
+    const linkedinurlforAll = fs.readFileSync("linkedinurlforAll.txt", "utf8");
+    let companyName = "";
+    const parsedUrl = new URL(url);
+    const segments = parsedUrl.pathname.split("/").filter(Boolean); // remove empty
+    // Look for the segment following 'company'
+    const idx = segments.indexOf("company");
+    if (idx !== -1 && segments.length > idx + 1) {
+      companyName = segments[idx + 1];
+    }
+    // Normalize LinkedIn company URL to the company profile page
+    // e.g. convert https://www.linkedin.com/company/moonee/jobs/ -> https://www.linkedin.com/company/moonee/
+    let companyProfileUrl = null;
+    if (companyName) {
+      companyProfileUrl = `${parsedUrl.protocol}//${parsedUrl.host}/company/${companyName}/`;
+      // use the profile URL for subsequent API calls that expect the company page
+      url = companyProfileUrl;
+    }
+    const jobPageUrl = JSON.parse(linkedinurlforAll);
+    let snapshot_id;
+    if (!jobPageUrl[companyName]) {
+      await axios
+        .post(
+          `https://api.brightdata.com/datasets/v3/trigger?dataset_id=gd_l1vikfnt1wgvvqz95w&include_errors=true`,
+          { url: url },
+          {
+            headers: {
+              Authorization: `Bearer ${brightKey}`,
+              "Content-Type": "application/json",
+            },
+          },
+        )
+        .then((response) => {
+          snapshot_id = response.data.snapshot_id;
+          console.log(response.data);
+        })
+        .catch((error) => console.error(error));
+
+      for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+        try {
+          console.log(`⏳ Attempt ${attempt}: Fetching snapshot data...`);
+
+          const response = await axios.get(
+            `https://api.brightdata.com/datasets/v3/snapshot/${snapshot_id}?format=json`,
             {
               headers: {
                 Authorization: `Bearer ${brightKey}`,
-                "Content-Type": "application/json",
               },
-            }
-          )
-          .then((response) => {
-            snapshot_id = response.data.snapshot_id;
-            console.log(response.data);
-          })
-          .catch((error) => console.error(error));
+              timeout: 15000, // 15s timeout to avoid hanging
+            },
+          );
 
-        for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
-          try {
-            console.log(`⏳ Attempt ${attempt}: Fetching snapshot data...`);
-
-            const response = await axios.get(
-              `https://api.brightdata.com/datasets/v3/snapshot/${snapshot_id}?format=json`,
-              {
-                headers: {
-                  Authorization: `Bearer ${brightKey}`,
-                },
-                timeout: 15000 // 15s timeout to avoid hanging
-              }
+          if (response.status === 200) {
+            console.log("✅ Snapshot is ready! Data:");
+            companyData = response.data;
+            console.log("Data:", companyData);
+            jobPageUrl[companyName] =
+              `https://www.linkedin.com/jobs/${companyData[0].name.replace(/\s+/g, "")}-jobs-worldwide?f_C=${companyData[0].company_id}`;
+            fs.writeFileSync(
+              "linkedinurlforAll.txt",
+              JSON.stringify(jobPageUrl, null, 2),
+              "utf8",
             );
-
-            if (response.status === 200) {
-              console.log("✅ Snapshot is ready! Data:");
-              companyData = response.data;
-              console.log('Data:', companyData);
-              jobPageUrl[companyName] = `https://www.linkedin.com/jobs/${companyData[0].name.replace(/\s+/g, '')}-jobs-worldwide?f_C=${companyData[0].company_id}`;
-              fs.writeFileSync(
-                "linkedinurlforAll.txt",
-                JSON.stringify(jobPageUrl, null, 2),
-                "utf8"
-              );
-              break;
-            } else {
-              console.log(
-                "⚠️ Snapshot not ready yet (empty response), retrying..."
-              );
-            }
-          } catch (err) {
-            console.log(`⚠️ Error on attempt ${attempt}: ${err.message}`);
             break;
+          } else {
+            console.log(
+              "⚠️ Snapshot not ready yet (empty response), retrying...",
+            );
           }
-          // Wait before next try
-          await delay(DELAY_MS);
+        } catch (err) {
+          console.log(`⚠️ Error on attempt ${attempt}: ${err.message}`);
+          break;
         }
+        // Wait before next try
+        await delay(DELAY_MS);
       }
+    }
 
     if (!jobPageUrl[companyName]) return { found: 1, jobs: "[]" };
 
-    
     await axios
-        .post("https://api.brightdata.com/datasets/v3/trigger?dataset_id=gd_lpfll7v5hcqtkxl6l&include_errors=true&type=discover_new&discover_by=url",
-          { url: jobPageUrl[companyName] },
-          {
-            headers: {
-              "Authorization": "Bearer 00af2aac5429b88e7c595f0090606d12abae32445f73502e3503ea37b724c9ad",
-              "Content-Type": "application/json",
-            },
-          }
-        )
-        .then((response) => {
-          console.log(response.data);
-          snapshot_id = response.data.snapshot_id;
-        })
-        .catch((error) => console.error(error));
+      .post(
+        "https://api.brightdata.com/datasets/v3/trigger?dataset_id=gd_lpfll7v5hcqtkxl6l&include_errors=true&type=discover_new&discover_by=url",
+        { url: jobPageUrl[companyName] },
+        {
+          headers: {
+            Authorization:
+              "Bearer 00af2aac5429b88e7c595f0090606d12abae32445f73502e3503ea37b724c9ad",
+            "Content-Type": "application/json",
+          },
+        },
+      )
+      .then((response) => {
+        console.log(response.data);
+        snapshot_id = response.data.snapshot_id;
+      })
+      .catch((error) => console.error(error));
 
     let jobAnchors = [];
 
@@ -438,18 +437,21 @@ const Scraper = async (name, url, apiKey, step, links) => {
             headers: {
               Authorization: `Bearer ${brightKey}`,
             },
-            timeout: 15000 // 15s timeout to avoid hanging
-          }
+            timeout: 15000, // 15s timeout to avoid hanging
+          },
         );
 
         if (response.status === 200) {
           console.log("✅ Snapshot is ready! Data:");
-          jobAnchors = response.data;
-          console.log('Data:', jobAnchors);
+          jobAnchors = response.data.filter(
+            (item, index, arr) =>
+              index === arr.findIndex((x) => x.url === item.url),
+          );
+          console.log("Data:", jobAnchors);
           break;
         } else {
           console.log(
-            "⚠️ Snapshot not ready yet (empty response), retrying..."
+            "⚠️ Snapshot not ready yet (empty response), retrying...",
           );
         }
       } catch (err) {
@@ -461,18 +463,38 @@ const Scraper = async (name, url, apiKey, step, links) => {
     }
 
     console.log("jobAnchors", jobAnchors.length);
-    let json = jobAnchors.filter(a => !(Array.isArray(links) ? links : []).some(l => l && l.includes(a.url)))
-        .map((a) => {
-          return {title: a.job_title, company: a.company_name, link: a.url}
-        })
+    let json = jobAnchors
+      .filter(
+        (a) =>
+          !(Array.isArray(links) ? links : []).some(
+            (l) => l && l.includes(a.url),
+          ),
+      )
+      .map((a) => {
+        return { title: a.job_title, company: a.company_name, link: a.url };
+      });
 
-    const removed = (Array.isArray(links) ? links : []).filter(l => l && !(Array.isArray(jobAnchors) ? jobAnchors : []).some(j => l.includes(j.url)));
-    
+    const removed = (Array.isArray(links) ? links : []).filter(
+      (l) =>
+        l &&
+        !(Array.isArray(jobAnchors) ? jobAnchors : []).some((j) =>
+          l.includes(j.url),
+        ),
+    );
+
     console.log("Parsed JSON:", json.length);
     page.close();
-    return { found: 1, jobs: JSON.stringify(json), removed: JSON.stringify(removed) };
+    return {
+      found: 1,
+      jobs: JSON.stringify(json),
+      removed: JSON.stringify(removed),
+    };
   } else {
-    if (step == 1 && !url.includes("apply.workable.com") && !url.includes("comeet.com")) {
+    if (
+      step == 1 &&
+      !url.includes("apply.workable.com") &&
+      !url.includes("comeet.com")
+    ) {
       const domain = new URL(url).hostname;
       console.log("domain", domain);
       const urlforAll = fs.readFileSync("urlforAll.txt", "utf8");
@@ -514,7 +536,7 @@ const Scraper = async (name, url, apiKey, step, links) => {
         fs.writeFileSync(
           "urlforAll.txt",
           JSON.stringify(parsedUrl, null, 2),
-          "utf8"
+          "utf8",
         );
       }
     }
@@ -525,7 +547,7 @@ const Scraper = async (name, url, apiKey, step, links) => {
 
     await page.evaluate(() => {
       const button = Array.from(document.querySelectorAll("button")).find(
-        (btn) => btn.textContent.trim().toLowerCase() === "accept all"
+        (btn) => btn.textContent.trim().toLowerCase() === "accept all",
       );
       if (button) button.click();
     });
@@ -544,11 +566,16 @@ const Scraper = async (name, url, apiKey, step, links) => {
     for (const frame of frames) {
       let frameAnchors = {};
       try {
-        if (step == 1 && !url.includes("kelloggcareers") && !url.includes("fixify") && !url.includes("spikerz")) {
+        if (
+          step == 1 &&
+          !url.includes("kelloggcareers") &&
+          !url.includes("fixify") &&
+          !url.includes("spikerz")
+        ) {
           const navigatingElements = await frame.$$("a");
           for (const handle of navigatingElements) {
             const text = await handle.evaluate((el) =>
-              el.textContent.toLowerCase().trim()
+              el.textContent.toLowerCase().trim(),
             );
             const target = await handle.getAttribute("target");
             const href = await handle.getAttribute("href");
@@ -568,7 +595,7 @@ const Scraper = async (name, url, apiKey, step, links) => {
         for (const handle of clickableElements) {
           if (!(await handle.isVisible())) continue;
           const text = await handle.evaluate((el) =>
-            el.textContent.toLowerCase().trim()
+            el.textContent.toLowerCase().trim(),
           );
           const target = await handle.getAttribute("target");
 
@@ -590,7 +617,7 @@ const Scraper = async (name, url, apiKey, step, links) => {
               for (const handle of clickableElements) {
                 if (!(await handle.isVisible())) continue;
                 const text = await handle.evaluate((el) =>
-                  el.textContent.toLowerCase().trim()
+                  el.textContent.toLowerCase().trim(),
                 );
                 const target = await handle.getAttribute("target");
 
@@ -600,7 +627,7 @@ const Scraper = async (name, url, apiKey, step, links) => {
               if (
                 (await clickable[i].isVisible()) &&
                 (await clickable[i].evaluate((el) =>
-                  document.body.contains(el)
+                  document.body.contains(el),
                 ))
               ) {
                 // Scroll to the link and click it
@@ -613,8 +640,8 @@ const Scraper = async (name, url, apiKey, step, links) => {
                 let clickResult = await page.evaluate(() => {
                   const candidates = Array.from(
                     document.body.querySelectorAll(
-                      "h1, h2, h3, h4, h5, p, a, span, div, td"
-                    )
+                      "h1, h2, h3, h4, h5, p, a, span, div, td",
+                    ),
                   );
 
                   const classMap = {};
@@ -664,7 +691,7 @@ const Scraper = async (name, url, apiKey, step, links) => {
                     ([className, elements]) => ({
                       className,
                       elements,
-                    })
+                    }),
                   );
                 });
 
@@ -694,7 +721,7 @@ const Scraper = async (name, url, apiKey, step, links) => {
             ([className, elements]) => ({
               className,
               elements,
-            })
+            }),
           );
           // Add the extracted anchors to the jobAnchors array
           frameAnchors.map((a) => {
@@ -710,8 +737,8 @@ const Scraper = async (name, url, apiKey, step, links) => {
           // Extract all anchor elements from the new frame
           const candidates = Array.from(
             document.body.querySelectorAll(
-              "h1, h2, h3, h4, h5, p, a, span, div, td"
-            )
+              "h1, h2, h3, h4, h5, p, a, span, div, td",
+            ),
           );
 
           const classMap = {};
@@ -766,7 +793,7 @@ const Scraper = async (name, url, apiKey, step, links) => {
         ([className, elements]) => ({
           className,
           elements,
-        })
+        }),
       );
       console.log("initial-frameAnchors", frameAnchors.length);
       // Add the extracted anchors to the jobAnchors array
@@ -836,14 +863,15 @@ const Scraper = async (name, url, apiKey, step, links) => {
     // Handling no href case
     if (page.url().includes("pomvom")) {
       selector = "div.target-job-title.text-xl.font-semibold";
-      let candidates = [], jobs = [];
+      let candidates = [],
+        jobs = [];
       try {
         try {
           console.log("Querying selector:", selector);
           // First try main frame
           candidates = await page.$$(selector);
           console.log("Main frame found:", candidates.length);
-          
+
           // If main frame returns nothing, try all frames
           if (candidates.length === 0) {
             console.log("Trying frames...");
@@ -852,7 +880,9 @@ const Scraper = async (name, url, apiKey, step, links) => {
               try {
                 const frameCandidates = await frame.$$(selector);
                 if (frameCandidates.length > 0) {
-                  console.log(`Found ${frameCandidates.length} in frame: ${frame.url()}`);
+                  console.log(
+                    `Found ${frameCandidates.length} in frame: ${frame.url()}`,
+                  );
                   candidates = frameCandidates;
                   break;
                 }
@@ -874,7 +904,7 @@ const Scraper = async (name, url, apiKey, step, links) => {
       } catch (err) {
         console.warn(
           "⚠️ Failed to query candidates after navigation:",
-          err.message
+          err.message,
         );
       }
 
@@ -894,19 +924,31 @@ const Scraper = async (name, url, apiKey, step, links) => {
             return {
               title: el.textContent.trim(),
               company: "",
-              link: attrs['href'] || url,
+              link: attrs["href"] || url,
             };
           }, url);
-          jobs.push({title, company, link});
+          jobs.push({ title, company, link });
         } catch (err) {
           console.warn(`⚠️ Skipped candidate due to:`, err.message);
         }
       }
-      const removed = (Array.isArray(links) ? links : []).filter(l => l && !(Array.isArray(jobs) ? jobs : []).some(j => l.includes(j.link)));
-      jobs = jobs.filter((a) => !(Array.isArray(links) ? links : []).some((l) => l && l.includes(a.link)));
-      return { found: 1, jobs: JSON.stringify(jobs), removed: JSON.stringify(removed) };
-    }
-    else {
+      const removed = (Array.isArray(links) ? links : []).filter(
+        (l) =>
+          l &&
+          !(Array.isArray(jobs) ? jobs : []).some((j) => l.includes(j.link)),
+      );
+      jobs = jobs.filter(
+        (a) =>
+          !(Array.isArray(links) ? links : []).some(
+            (l) => l && l.includes(a.link),
+          ),
+      );
+      return {
+        found: 1,
+        jobs: JSON.stringify(jobs),
+        removed: JSON.stringify(removed),
+      };
+    } else {
       if (selectorArray.length == 0) return { found: 1, jobs: "[]" };
       for (predictedClassName of selectorArray) {
         selector += predictedClassName + ",";
@@ -933,7 +975,7 @@ const Scraper = async (name, url, apiKey, step, links) => {
         for (const handle of clickableElements) {
           if (!(await handle.isVisible())) continue;
           const text = await handle.evaluate((el) =>
-            el.textContent.toLowerCase().trim()
+            el.textContent.toLowerCase().trim(),
           );
           const target = await handle.getAttribute("target");
 
@@ -957,7 +999,7 @@ const Scraper = async (name, url, apiKey, step, links) => {
         ) {
           console.log(
             "Attempting to click element:",
-            await el.evaluate((el) => el.outerHTML)
+            await el.evaluate((el) => el.outerHTML),
           );
           await el.scrollIntoViewIfNeeded();
           await page.waitForTimeout(500); // Give time to settle
@@ -977,7 +1019,7 @@ const Scraper = async (name, url, apiKey, step, links) => {
             if (
               !jobAnchors.some((j) => j.href === a.href && j.text === a.text)
             ) {
-              jobAnchors.push({...a, parent: page.url()});
+              jobAnchors.push({ ...a, parent: page.url() });
             }
           }
 
@@ -1020,11 +1062,20 @@ const Scraper = async (name, url, apiKey, step, links) => {
       }
 
       // Add the extracted anchors to the jobAnchors array
-      frameAnchors.forEach((a) => jobAnchors.push({...a, parent: frame.url()}));
+      frameAnchors.forEach((a) =>
+        jobAnchors.push({ ...a, parent: frame.url() }),
+      );
     }
-    console.log('links -> ', links);
+    console.log("links -> ", links);
     urlcontext = (Array.isArray(jobAnchors) ? jobAnchors : [])
-      .filter((a) => a.href && !(Array.isArray(links) ? links : []).some((l) => l && l.includes(a.href)) && a.text.length < 300)
+      .filter(
+        (a) =>
+          a.href &&
+          !(Array.isArray(links) ? links : []).some(
+            (l) => l && l.includes(a.href),
+          ) &&
+          a.text.length < 300,
+      )
       .map((a) => {
         return !a.href.includes(a.text)
           ? `${a.text} — ${a.href} — ${a.parent || url}`
@@ -1032,16 +1083,26 @@ const Scraper = async (name, url, apiKey, step, links) => {
       })
       .join("\n");
 
-    const removed = (Array.isArray(links) ? links : []).filter(l => l && !(Array.isArray(jobAnchors) ? jobAnchors : []).some(j => l.includes(j.href)));
+    const removed = (Array.isArray(links) ? links : []).filter(
+      (l) =>
+        l &&
+        !(Array.isArray(jobAnchors) ? jobAnchors : []).some((j) =>
+          l.includes(j.href),
+        ),
+    );
     fs.writeFileSync("job_links_for_llm.txt", urlcontext);
 
     const index = url.lastIndexOf("#");
     index != -1 ? url.slice(0, index) : url;
-    
+
     // here href might not be full url like "/jobs/senior-antenna-array-design-engineer-1", in this case it should be combined with base url
-    let prefixNeeded = Array.isArray(jobAnchors) && jobAnchors.length > 0 && typeof jobAnchors[0].href === "string" && !jobAnchors[0].href.includes("http");
-    prefixNeeded ? 
-    prompt = `Below is data related to job postings with the format (content — href — parent_href). 
+    let prefixNeeded =
+      Array.isArray(jobAnchors) &&
+      jobAnchors.length > 0 &&
+      typeof jobAnchors[0].href === "string" &&
+      !jobAnchors[0].href.includes("http");
+    prefixNeeded
+      ? (prompt = `Below is data related to job postings with the format (content — href — parent_href). 
   "${urlcontext}"
   if ${urlcontext} is empty or contains no columns related to job, return an empty array [].
   Extract all job postings in JSON format with the following fields:
@@ -1057,8 +1118,8 @@ const Scraper = async (name, url, apiKey, step, links) => {
       "link": "Full Job Posting URL"
     },
     ...
-  ]`:
-    prompt = `Below is data related to job postings with the format (content — href).
+  ]`)
+      : (prompt = `Below is data related to job postings with the format (content — href).
 "${urlcontext}"
 
 If ${urlcontext} is empty or contains no job-related rows, return an empty array [].
@@ -1083,7 +1144,7 @@ Output format:
     "link": "Exact href provided"
   }
 ]
-`;
+`);
     const res = await openai.chat.completions.create({
       model: "gpt-4o",
       messages: [{ role: "user", content: prompt }],
@@ -1096,7 +1157,7 @@ Output format:
 
       // First, try to extract JSON from markdown code blocks
       let jsonStr = null;
-      
+
       // Try to match ```json ... ``` or ``` ... ```
       const codeBlockMatch = rawContent.match(/```(?:json)?\s*([\s\S]*?)```/);
       if (codeBlockMatch && codeBlockMatch[1]) {
@@ -1105,11 +1166,11 @@ Output format:
         // If no code block, try to find a JSON array by matching balanced brackets
         // Find the first [ and then find the matching ]
         let bracketCount = 0;
-        let startIndex = rawContent.indexOf('[');
+        let startIndex = rawContent.indexOf("[");
         if (startIndex !== -1) {
           for (let i = startIndex; i < rawContent.length; i++) {
-            if (rawContent[i] === '[') bracketCount++;
-            if (rawContent[i] === ']') bracketCount--;
+            if (rawContent[i] === "[") bracketCount++;
+            if (rawContent[i] === "]") bracketCount--;
             if (bracketCount === 0) {
               jsonStr = rawContent.substring(startIndex, i + 1).trim();
               break;
@@ -1121,7 +1182,7 @@ Output format:
       if (jsonStr) {
         // Clean up the JSON string - remove any trailing text after the closing bracket
         // Find the last valid closing bracket
-        let lastBracketIndex = jsonStr.lastIndexOf(']');
+        let lastBracketIndex = jsonStr.lastIndexOf("]");
         if (lastBracketIndex !== -1) {
           jsonStr = jsonStr.substring(0, lastBracketIndex + 1);
         }
@@ -1138,7 +1199,11 @@ Output format:
 
     page.close();
 
-    return { found: 1, jobs: JSON.stringify(json), removed: JSON.stringify(removed) };
+    return {
+      found: 1,
+      jobs: JSON.stringify(json),
+      removed: JSON.stringify(removed),
+    };
   }
 };
 

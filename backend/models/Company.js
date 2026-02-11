@@ -72,7 +72,7 @@ class Company {
           if (job.link && job.link.includes('linkedin.com')) linkedinlinks.push(job.link);
           else if (job.link) websitelinks.push(job.link);
         });
-        if (company.website.includes("spikerz")) websitelinks = linkedinlinks;
+        if (company.website.toLowerCase().includes("spikerz")) websitelinks = linkedinlinks;
         // Scan website only if website is in scanTypes
         if (scanTypes.includes('website')) {
           WebsitejobList = await Scraper(company.name, company.website, apiKey, 1, websitelinks);
