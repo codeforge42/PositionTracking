@@ -113,7 +113,7 @@ class Company {
         const now  = new Date();
         classified_jobList = [];
         for (const job of jobList) {
-          if (!job.link) continue;
+          if (job.link == undefined || job.link == null || job.link.trim() === '') continue;
           const jobPosting = {
             title: job.title,
             company: company.name,
